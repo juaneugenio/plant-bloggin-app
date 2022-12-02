@@ -1,11 +1,11 @@
 /** @format */
 
 const mongoose = require("mongoose");
-
 const postSchema = new mongoose.Schema({
 	imageUrl: {
 		type: String,
-		default: String, //TO DO: to paste a urlimage from anyplant in the internet
+		default:
+			"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*",
 	},
 	title: {
 		type: String,
@@ -26,7 +26,7 @@ const postSchema = new mongoose.Schema({
 			ref: "Comment",
 		},
 	],
-	timestamps: true,
+	time: { type: Date, default: Date.now },
 });
 const Post = mongoose.model("Post", postSchema);
 
