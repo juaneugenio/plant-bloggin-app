@@ -30,6 +30,21 @@ router.get("/:id", async (req, res) => {
 		res.status(404).json({ message: error.message });
 	}
 });
+router.patch("/:id", async (req, res) => {
+	try {
+		const { id: postID } = req.params;
+		const patchSinglePost = await PostModel.findOneAndUpdate({ _id: postID }, req.body, {
+			new: true,
+			runValidators: true,
+		});
+		if (!patchSinglePost) {
+			return res.status(404).json({ message: `Post Id: ${postID} successful Updated!` });
+		}
+		res.status(200).json({ patchSinglePost });
+	} catch (error) {
+		res.status(404).json({ message: error.message });
+	}
+});
 router.delete("/:id", async (req, res) => {
 	try {
 		const { id: postID } = req.params;
