@@ -30,10 +30,14 @@ router.get("/:id", async (req, res) => {
 		res.status(404).json({ message: error.message });
 	}
 });
-router.delete("/:postId", (req, res) => {
+router.delete("/:id", async (req, res) => {
 	try {
-		res.send("deleted post");
-		res.status(200).json(allPosts);
+		const { id: postID } = req.params;
+		const deleteSinglePost = await PostModel.findByIdAndDelete({ _id: postID });
+		if (!deleteSinglePost) {
+			return res.status(404).json({ message: `No Post with Id: ${postID}` });
+		}
+		res.status(200).json({ message: `Post Id: ${postID} successful deleted` });
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}
