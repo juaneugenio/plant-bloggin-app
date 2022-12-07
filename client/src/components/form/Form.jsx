@@ -17,10 +17,10 @@ const Form = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post("http://localhost:5173/api/", formData);
+			await axios.post("http://localhost:5000/api/posts", formData);
 			setFormData(initialFormData);
-			console.log("Post successful created");
-			window.location = "http://localhost:5173/api/posts";
+			console.log("👍🏼 Post successful created");
+			// window.location = "http://localhost:5173/api/posts";
 		} catch (error) {
 			console.log({ message: error.message });
 		}
