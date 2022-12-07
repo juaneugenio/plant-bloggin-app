@@ -1,0 +1,30 @@
+/** @format */
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.headerTitles {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	font-family: "Lora", serif;
+	color: #b2cbb1;
+}
+h1 {
+	position: absolute;
+	top: 25%;
+	left: 20%;
+	font-size: 3rem;
+}
+p {
+	position: absolute;
+	top: 35%;
+	left: 20%;
+	font-size: 1.4rem;
+}
+.headerImg {
+	width: 100%;
+	height: 25rem;
+	object-fit: cover;
+}
