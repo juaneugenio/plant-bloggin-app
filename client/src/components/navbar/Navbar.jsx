@@ -3,10 +3,10 @@
 import "./navbar.css";
 const Navbar = () => {
 	return (
-		<div className="top">
+		<div className="navbar">
 			<div className="topLeft">
 				<i className="material-symbols-outlined">grass</i>
-				<span className="logo-Txt">Bl-anty</span>
+				<span className="logo-Txt">Bl.anty</span>
 			</div>
 			<div className="topCenter">
 				<ul className="center-links">

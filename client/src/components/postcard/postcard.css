@@ -1,0 +1,64 @@
+/** @format */
+
+.postCard {
+	width: 12rem;
+	margin: 0 0.8rem 0.8rem 0;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.postImg {
+	width: 100%;
+	height: 280px;
+	object-fit: cover;
+	border-radius: 0.3rem 0.3rem 0 0;
+}
+.postInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.postCat {
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 0.7rem;
+	color: #7b927c;
+	line-height: 1.1rem;
+	margin-top: 0.9rem;
+	margin-right: 0.6rem;
+	cursor: pointer;
+}
+.postTitle {
+	font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+	font-size: 1.2rem;
+	font-weight: 900;
+	margin-top: 0.8rem;
+	cursor: pointer;
+	color: #1b4769;
+}
+.postDate {
+	font-family: "Lora", serif;
+	font-style: italic;
+	font-size: 0.8rem;
+	font-weight: 400;
+	color: #b2cbb1;
+	margin-top: 0.2rem;
+}
+.postDesc {
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 0.75rem;
+	line-height: 1.1rem;
+	color: #444444;
+	margin: 0.7rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+hr {
+	margin-top: 0.4rem;
+	width: 50%;
+	height: 0.5px;
+	border: none;
+	background-color: #b2cbb1;
+}
