@@ -3,17 +3,17 @@
 import "./navbar.css";
 const Navbar = () => {
 	return (
-		<div className="navbar">
+		<nav className="navbar">
 			<div className="topLeft">
 				<i className="material-symbols-outlined">grass</i>
 				<span className="logo-Txt">Bl.anty</span>
 			</div>
 			<div className="topCenter">
 				<ul className="center-links">
-					<li>HOME</li>
-					<li>ABOUT</li>
-					<li>CREATE</li>
-					<li>LOGOUT</li>
+					<li className="linksCenter">HOME</li>
+					<li className="linksCenter">ABOUT</li>
+					<li className="linksCenter">CREATE</li>
+					<li className="linksCenter">LOGOUT</li>
 				</ul>
 			</div>
 			<div className="topRight">
@@ -24,7 +24,7 @@ const Navbar = () => {
 				/>
 				<i className=" searchIcon material-symbols-outlined">search</i>
 			</div>
-		</div>
+		</nav>
 	);
 };
 
