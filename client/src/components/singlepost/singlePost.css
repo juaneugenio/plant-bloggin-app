@@ -1,0 +1,53 @@
+/** @format */
+
+.singlePost {
+	flex: 9;
+}
+.singlePostContent {
+	border: 1px solid blue;
+	padding: 1.2rem;
+	padding-right: 0;
+}
+.spImage {
+	width: 100%;
+	height: 300px;
+	border-radius: 0.6rem 0 0.6rem 0;
+	object-fit: cover;
+}
+.singlePostTitle {
+	margin: 0.8rem 0;
+	font-size: 1.8rem;
+	font-family: "Josefine", serif;
+	font-weight: bold;
+	color: #1b4769;
+}
+.editBtns {
+	float: right;
+}
+.singlePostIcon {
+	margin-right: 0.7rem;
+	cursor: pointer;
+}
+
+.singlePostIcon:last-child {
+	color: rgb(244, 119, 119);
+}
+.spInfo {
+	display: flex;
+	margin-bottom: 1.3rem;
+	justify-content: space-between;
+	font-family: "Lora", serif;
+	color: #80775b;
+}
+.spDescription {
+	font-family: "Josefine", sans-serif;
+	font-weight: 300;
+	font-size: 1.2rem;
+	color: rgb(70, 69, 69);
+	line-height: 1.5rem;
+}
+.spDescription::first-letter {
+	margin-left: 1rem;
+	font-weight: bold;
+	font-size: 1.7rem;
+}

@@ -2,54 +2,60 @@
 
 .navbar {
 	width: 100%;
-	height: 3rem;
+	/* height: 3rem; */
 	background-color: #a1c69f;
 	position: sticky;
 	top: 0;
 	z-index: 99;
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	align-items: center;
 	font-family: "Josefin Sans", sans-serif;
 	color: #1b4769;
+	padding: 0.5rem 0;
 }
 .topLeft,
 .topRight {
 	flex: 3;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	flex-wrap: wrap;
+}
+.topLeft {
+	align-items: flex-end;
 }
 .topCenter {
 	flex: 6;
-
-	align-items: baseline;
 }
 
 .topLeft i {
 	color: #80775b;
 	cursor: pointer;
 	font-size: 1.6rem;
-	margin: 0;
 }
 .logo-Txt {
 	cursor: pointer;
-	margin: 0.2rem;
 	font-size: 1.2rem;
+	font-weight: 500;
 	color: #1b4769;
 }
 
 .center-links {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 	list-style: none;
 	margin: 0;
-	padding: 0;
 }
-.center-links li {
-	margin-right: 1.2rem;
+.linksCenter {
+	margin: 0 0.5rem;
 	font-size: 1.1rem;
 	font-weight: 300;
 	cursor: pointer;
+}
+.topRight {
+	align-items: center;
 }
 .profileImg {
 	width: 2rem;
@@ -59,8 +65,8 @@
 	cursor: pointer;
 }
 .searchIcon {
-	margin-left: 0.9rem;
-	font-size: 1.5rem;
+	font-size: 1.7rem;
 	color: #1b4769;
+	margin: 0 0.5rem;
 	cursor: pointer;
 }
