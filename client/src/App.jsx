@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import SinglePage from "./pages/single/SinglePage";
 import WriteBlogPage from "./pages/write/WriteBlogPage";
+import Settings from "./pages/settings/Settings";
 
 function App() {
 	return (
@@ -12,7 +13,8 @@ function App() {
 			<Navbar />
 			{/* <Home /> */}
 			{/* <SinglePage /> */}
-			<WriteBlogPage />
+			{/* <WriteBlogPage /> */}
+			<Settings />
 		</>
 	);
 }
