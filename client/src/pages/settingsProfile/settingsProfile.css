@@ -1,13 +1,15 @@
 /** @format */
 
-.settings {
+.settingsPage {
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .settingsWrapper {
-	flex: 6;
+	flex: 5;
+	margin: 1.3rem;
 }
+
 .settingsTitle {
 	display: flex;
 	align-items: center;
@@ -15,15 +17,21 @@
 }
 
 .settingsTitleUpdate {
-	font-size: 1.8rem;
-	margin-bottom: 20px;
-	color: #7b927c;
+	font-size: 1.3rem;
+	margin-bottom: 1.2rem;
+	color: #043e80;
 }
 
 .settingsTitleDelete {
 	color: red;
-	font-size: 12px;
+	font-size: 0.8rem;
 	cursor: pointer;
+}
+.settingsTitleDelete:hover {
+	color: #e9eaeb;
+	background-color: #e02609;
+	padding: 0.4rem;
+	border-radius: 0.4rem;
 }
 
 .settingsForm {

@@ -1,10 +1,10 @@
 /** @format */
 import Sidebar from "../../components/sidebar/Sidebar";
-import "./settings.css";
+import "./settingsProfile.css";
 
 const Settings = () => {
 	return (
-		<div className="settigns">
+		<div className="settingsPage">
 			<div className="settingsWrapper">
 				<div className="settingsTitle">
 					<span className="settingsTitleUpdate">Update Your Account</span>
