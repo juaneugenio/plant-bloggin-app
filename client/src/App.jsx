@@ -6,6 +6,8 @@ import Home from "./pages/home/Home";
 import SinglePage from "./pages/single/SinglePage";
 import WriteBlogPage from "./pages/write/WriteBlogPage";
 import Settings from "./pages/settingsProfile/SettingsProfile";
+import LoginPage from "./pages/login/LoginPage";
+LoginPage;
 
 function App() {
 	return (
@@ -14,7 +16,8 @@ function App() {
 			{/* <Home /> */}
 			{/* <SinglePage /> */}
 			{/* <WriteBlogPage /> */}
-			<Settings />
+			{/* <Settings /> */}
+			<LoginPage />
 		</>
 	);
 }
