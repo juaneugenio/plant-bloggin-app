@@ -23,9 +23,9 @@ const Settings = () => {
 						<input id="fileInput" type="file" style={{ display: "none" }} className="settingsPPInput" />
 					</div>
 					<label>Username</label>
-					<input type="text" placeholder="Joan" name="name" />
+					<input type="text" placeholder="Joan Doe" name="name" />
 					<label>Email</label>
-					<input type="email" placeholder="joan@gmail.com" name="email" />
+					<input type="email" placeholder="joandoe@gmail.com" name="email" />
 					<label>Password</label>
 					<input type="password" placeholder="Password" name="password" />
 					<button className="settingsSubmitButton" type="submit">
@@ -38,4 +38,3 @@ const Settings = () => {
 	);
 };
 export default Settings;
-// video 1:12:00 https://www.youtube.com/watch?v=tlTdbc5byAs
