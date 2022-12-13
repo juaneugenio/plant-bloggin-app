@@ -1,0 +1,78 @@
+/** @format */
+
+.registerContainer {
+	display: flex;
+	height: calc(100vh - 3rem);
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: url("https://hips.hearstapps.com/amv-prod-gp.s3.amazonaws.com/gearpatrol/wp-content/uploads/2019/01/10-Best-Indoor-Plants-Gear-Patrol-lead-full.jpg?crop=1.00xw:0.751xh;0,0.244xh&resize=980:*");
+	background-size: cover;
+	color: #3388cb;
+}
+.registerTitle {
+	font-size: 2.5rem;
+	color: #d4e6f4;
+	font-weight: bold;
+}
+.registerForm {
+	margin: 1rem;
+	display: flex;
+	flex-direction: column;
+	background: rgba(245, 197, 197, 0.8);
+	backdrop-filter: blur(2px);
+	border-radius: 0.5rem;
+	padding: 1rem;
+}
+.registerForm > label {
+	margin: 0.2rem 0;
+	font-size: 1.2rem;
+	font-family: "Josefin Sans", serif;
+	font-weight: 500;
+}
+.registerInput {
+	padding: 0.2rem 0;
+	margin-bottom: 1.2rem;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #80775b;
+	color: #1b4769;
+	outline: none;
+}
+.registerInput::placeholder {
+	color: #5d7a5d;
+	font-family: "Lora", serif;
+	font-size: 0.8rem;
+	border: none;
+}
+.loginBtn {
+	margin-bottom: 0.7rem;
+	padding: 0.6rem;
+	border: none;
+	border-radius: 0.4rem;
+	background-color: #1b4769;
+	color: #d4e6f4;
+	cursor: pointer;
+}
+.loginBtn:hover {
+	background-color: #3388cb;
+}
+.registerInfo {
+	font-family: "Lora", serif;
+	font-size: 0.6rem;
+	color: #80775b;
+	text-align: center;
+	margin: 0.3rem 0;
+}
+.registerBtn {
+	margin-bottom: 0.7rem;
+	padding: 0.6rem;
+	border: none;
+	border-radius: 0.4rem;
+	background-color: #80775b;
+	color: #d4e6f4;
+	cursor: pointer;
+}
+.registerBtn:hover {
+	background-color: #7ba37a;
+}

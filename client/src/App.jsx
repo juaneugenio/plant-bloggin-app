@@ -7,6 +7,7 @@ import SinglePage from "./pages/single/SinglePage";
 import WriteBlogPage from "./pages/write/WriteBlogPage";
 import Settings from "./pages/settingsProfile/SettingsProfile";
 import LoginPage from "./pages/login/LoginPage";
+import RegisterPage from "./pages/register/RegisterPage";
 LoginPage;
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
 			{/* <SinglePage /> */}
 			{/* <WriteBlogPage /> */}
 			{/* <Settings /> */}
-			<LoginPage />
+			{/* <LoginPage /> */}
+			<RegisterPage />
 		</>
 	);
 }
