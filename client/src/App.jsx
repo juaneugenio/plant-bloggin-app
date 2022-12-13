@@ -19,7 +19,7 @@ function App() {
 			{/* <WriteBlogPage /> */}
 			{/* <Settings /> */}
 			{/* <LoginPage /> */}
-			<RegisterPage />
+			{/* <RegisterPage /> */}
 		</>
 	);
 }
