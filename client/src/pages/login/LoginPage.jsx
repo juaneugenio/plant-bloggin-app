@@ -1,4 +1,5 @@
 /** @format */
+import { Link } from "react-router-dom";
 import "./loginPage.css";
 const LoginPage = () => {
 	return (
@@ -12,7 +13,9 @@ const LoginPage = () => {
 				<input type="password" className="loginInput" placeholder="Enter your password..." />
 				<button className="loginBtn">Login</button>
 				<span className="registerInfo">No Account? Please, register.</span>
-				<button className="registerBtn">Register</button>
+				<Link to="/register" className="registerBtn">
+					<button>Register</button>
+				</Link>
 			</form>
 		</div>
 	);
