@@ -15,7 +15,7 @@ const RegisterPage = () => {
 				<button className="registerBtn">Register</button>
 				<span className="registerInfo">Already an Account? Please, Login.</span>
 				<Link to="/login" className="loginBtn">
-					<button>Login</button>
+					Login
 				</Link>
 			</form>
 		</div>
