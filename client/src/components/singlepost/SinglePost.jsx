@@ -1,6 +1,9 @@
 /** @format */
+import { useParams } from "react-router-dom";
 import "./singlePost.css";
 const SinglePost = () => {
+	const blogId = useParams();
+	console.log("%c recipeId ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", blogId);
 	return (
 		<div className="singlePost">
 			<div className="singlePostContent">

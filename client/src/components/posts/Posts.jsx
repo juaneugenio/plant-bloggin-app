@@ -2,14 +2,12 @@
 
 import "./posts.css";
 import PostCard from "../postcard/PostCard";
-const Posts = () => {
+const Posts = ({ posts }) => {
 	return (
 		<div className="posts">
-			<PostCard />
-			<PostCard />
-			<PostCard />
-			<PostCard />
-			<PostCard />
+			{posts.map((post) => (
+				<PostCard key={post._id} post={post} />
+			))}
 		</div>
 	);
 };

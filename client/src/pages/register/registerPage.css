@@ -46,6 +46,8 @@
 	border: none;
 }
 .loginBtn {
+	text-decoration: none;
+	text-align: center;
 	margin-bottom: 0.7rem;
 	padding: 0.6rem;
 	border: none;

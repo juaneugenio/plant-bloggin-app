@@ -30,9 +30,13 @@
 	font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
 	font-size: 1.2rem;
 	font-weight: 900;
-	margin-top: 0.8rem;
+	text-align: center;
+	margin: 0.8rem 0.7rem;
 	cursor: pointer;
 	color: #1b4769;
+}
+.postTitle::first-letter {
+	text-transform: capitalize;
 }
 .postDate {
 	font-family: "Lora", serif;
@@ -55,6 +59,7 @@
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
+
 hr {
 	margin-top: 0.4rem;
 	width: 50%;
