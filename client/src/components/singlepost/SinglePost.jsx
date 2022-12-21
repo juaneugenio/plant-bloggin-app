@@ -1,20 +1,39 @@
 /** @format */
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import "./singlePost.css";
+import axios from "axios";
 const SinglePost = () => {
-	const blogId = useParams();
-	console.log("%c recipeId ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", blogId);
+	const { blogId } = useParams();
+	const [singlePost, setSinglePost] = useState({});
+
+	useEffect(() => {
+		const singlePostURL = `http://localhost:5000/api/posts/${blogId}`;
+		const fetchSinglePost = async () => {
+			try {
+				const response = await axios.get(singlePostURL);
+				setSinglePost(response.data.getSinglePost);
+			} catch (error) {
+				console.log("File: SinglePost --> Line: 16", error.message);
+			}
+		};
+		fetchSinglePost();
+	}, []);
 	return (
 		<div className="singlePost">
 			<div className="singlePostContent">
 				<img
 					className="spImage"
-					src="https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/06/cuidados-de-los-girasoles-florestore.jpg?resize=846%2C602&ssl=1"
-					alt=""
+					src={
+						singlePost.imageUrl
+							? singlePost.imageUrl
+							: "https://friendlystock.com/wp-content/uploads/2020/12/3-kawaii-indoor-plant-cartoon-clipart.jpg"
+					}
+					alt={`Photo of ${singlePost.title}`}
 				/>
 
 				<h1 className="singlePostTitle">
-					Los girasoles son bonitos.{" "}
+					{singlePost.title}
 					<div className="editBtns">
 						<span className="singlePostIcon material-symbols-outlined">edit_note</span>
 						<span className="singlePostIcon material-symbols-outlined">delete</span>
@@ -22,27 +41,12 @@ const SinglePost = () => {
 				</h1>
 				<div className="spInfo">
 					<span className="spAuthor">
-						Author: <b>Torres</b>
+						Author:
+						<Link className="link-style">{singlePost.author ? <b> {singlePost.author} </b> : " No Author"}</Link>
 					</span>
-					<span className="spDate">1 hour ago</span>
+					<span className="spDate">{new Date(singlePost.time).toDateString()}</span>
 				</div>
-				<p className="spDescription">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sunt reiciendis sapiente fugiat magni
-					alias repellendus assumenda. Aliquid eligendi nam perferendis vel, natus at ipsum qui doloremque quisquam fuga
-					unde id. Eum doloribus voluptates enim, corrupti id accusantium nemo pariatur debitis maxime soluta atque
-					quod, hic dolores facere ab iusto sapiente ex doloremque, veritatis cupiditate ratione veniam iure
-					dignissimos. Debitis et perferendis minima voluptatem vitae, labore quos alias vero aspernatur praesentium!
-					Provident culpa nisi ex repudiandae enim delectus inventore nam eos nihil fuga ullam illo optio praesentium at
-					reiciendis quibusdam, quisquam porro est odio deleniti! Sint expedita exercitationem laboriosam adipisci
-					cumque labore possimus sunt voluptates odio itaque id quasi dolores, officiis cum nisi tempore temporibus hic
-					cupiditate obcaecati nostrum repellendus doloribus! Rerum debitis suscipit fugiat, deleniti veritatis dolores
-					aliquam dolorem possimus excepturi? Optio totam sapiente eveniet molestiae obcaecati quaerat minima laborum
-					repudiandae inventore, fugiat voluptates qui quidem libero impedit repellendus fuga, dolor at quae? Nihil
-					praesentium eveniet harum aliquid, delectus quas tenetur fugit nemo possimus vel qui saepe quam enim, sequi
-					nostrum quaerat cupiditate eligendi pariatur excepturi veniam exercitationem! Laudantium neque nemo
-					doloremque. Quae consectetur in est nam ipsum, quos odit, veritatis ullam cum suscipit tempore id quidem
-					deserunt possimus.
-				</p>
+				<p className="spDescription">{singlePost.description}</p>
 			</div>
 		</div>
 	);
