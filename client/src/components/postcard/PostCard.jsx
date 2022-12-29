@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import "./postcard.css";
 const PostCard = ({ post }) => {
-	console.log("%c post ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", post);
 	return (
 		<div className="postCard">
 			<img
@@ -20,7 +19,7 @@ const PostCard = ({ post }) => {
 					<span className="postCat">Outdoor</span>
 				</div>
 				<Link to={`/blogs/${post._id}`} className="link-style">
-					<span className="postTitle">{post.title}</span>
+					<p className="postTitle">{post.title}</p>
 				</Link>
 				<hr />
 				<span className="postDate">{new Date(post.time).toDateString()}</span>
