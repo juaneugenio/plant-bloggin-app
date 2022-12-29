@@ -17,12 +17,6 @@ function App() {
 					<Route key={route.path} path={route.path} element={route.element} />
 				))}
 			</Routes>
-			{/* <Home /> */}
-			{/* <SinglePage /> */}
-			{/* <WriteBlogPage /> */}
-			{/* <Settings /> */}
-			{/* <LoginPage /> */}
-			{/* <RegisterPage /> */}
 		</>
 	);
 }

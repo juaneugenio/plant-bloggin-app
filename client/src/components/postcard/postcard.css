@@ -14,9 +14,10 @@
 .postInfo {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
-	border: 1px solid blue;
+	padding: 0 0.2rem;
 }
 .postCat {
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
@@ -34,7 +35,6 @@
 	font-weight: 900;
 	color: #1b4769;
 	/* padding: 0 9rem; */
-	border: 1px solid blue;
 }
 .postTitle::first-letter {
 	text-transform: capitalize;
