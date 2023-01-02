@@ -8,7 +8,7 @@ const SinglePost = () => {
 	const [singlePost, setSinglePost] = useState({});
 
 	useEffect(() => {
-		const singlePostURL = `http://localhost:5000/api/posts/${blogId}`;
+		const singlePostURL = `http://localhost:3000/api/posts/${blogId}`;
 		const fetchSinglePost = async () => {
 			try {
 				const response = await axios.get(singlePostURL);

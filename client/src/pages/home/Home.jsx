@@ -9,7 +9,7 @@ const Home = () => {
 	const [posts, setPosts] = useState([]);
 	useEffect(() => {
 		const fetchingPosts = async () => {
-			let { data } = await axios.get("http://localhost:5000/api/posts");
+			let { data } = await axios.get("http://localhost:3000/api/posts");
 			setPosts(data);
 		};
 		fetchingPosts();
