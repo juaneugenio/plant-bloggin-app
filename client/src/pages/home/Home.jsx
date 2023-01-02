@@ -9,8 +9,17 @@ const Home = () => {
 	const [posts, setPosts] = useState([]);
 	useEffect(() => {
 		const fetchingPosts = async () => {
-			let { data } = await axios.get("http://localhost:3000/api/posts");
-			setPosts(data);
+			try {
+				let { data } = await axios.get("http://localhost:3000/api/posts");
+				setPosts(data);
+			} catch (error) {
+				console.log(
+					"%c error ▶︎ ",
+					"font-size:13px; background:#993441; color:#ffb8b1;",
+					"No Conexion with DB=>",
+					error.message,
+				);
+			}
 		};
 		fetchingPosts();
 	}, []);
