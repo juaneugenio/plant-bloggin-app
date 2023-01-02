@@ -2,30 +2,53 @@
 
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const { Router } = require("express");
 const mongoose = require("mongoose");
 
 const User = require("../models/User.model");
 const saltRounds = 10;
 
-/* router.get("/", async (req, res) => {
-	try {
-		const allPosts = await PostModel.find();
-		res.status(200).json(allPosts);
-	} catch (error) {
-		res.status(404).json({ message: error.message });
-	}
-});
- */
-console.log("▶︎▶︎▶︎ File: authen.routes ▶︎▶︎", "hola authentic");
 router.post("/register", async (req, res) => {
-	const { username, email, password } = req.body;
-	console.log("%c req.body ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", req.body);
+	const { username, password, email } = req.body;
+	if (!username || username.length < 3) {
+		return res.status(400).json({ errorMessage: "Please provide your username with more than 3 characters." });
+	}
+
+	if (!email) {
+		return res.status(400).json({ errorMessage: "Please provide your email." });
+	}
+
+	if (password.length < 6) {
+		return res.status(400).json({
+			errorMessage: "Your password needs to be at least 6 characters long.",
+		});
+	}
+
+	// const found = await User.findOne({ email });
+	// if (found) {
+	// 	console.log("▶︎▶︎▶︎ File: authen.routes ▶︎▶︎", "Email already taken. ");
+	// 	return res.status(400).json({ errorMessage: "Email already taken." });
+	// }
+
 	try {
-		const allPosts = await PostModel.find();
-		res.status(200).json(allPosts);
-	} catch (error) {
-		res.status(404).json({ message: error.message });
+		// const newUser = await User.create(req.body);
+		// console.log("▶︎▶︎▶︎ File: authen.routes ▶︎▶︎", "New USER succesful created!!");
+		// res.status(200).json({ newUser });
+		User.findOne({ email }, async (err, doc) => {
+			if (err) throw err;
+			if (doc) res.status(400).json({ errorMessage: "User with this Email already exist" });
+			if (!doc) {
+				const hashedPassword = await bcrypt.hash(password, saltRounds);
+				const newUser = new User({
+					username,
+					email,
+					password: hashedPassword,
+				});
+				await newUser.save();
+				res.status(200).json({ newUser });
+			}
+		});
+	} catch (err) {
+		res.status(500).json({ message: err.message });
 	}
 });
 
