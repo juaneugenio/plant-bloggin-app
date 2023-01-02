@@ -1,5 +1,5 @@
 /** @format */
-
+import * as PATH from "../utils/paths";
 import Home from "../pages/home/Home";
 import LoginPage from "../pages/login/LoginPage";
 import RegisterPage from "../pages/register/RegisterPage";
@@ -12,33 +12,33 @@ const routes = (props) => {
 	const user = false;
 	return [
 		{
-			path: "/",
+			path: PATH.TO__HOME_PAGE,
 			element: <Home />,
 		},
 		{
-			path: "/login",
+			path: PATH.TO__LOGIN_PAGE,
 			element: user ? <Home /> : <LoginPage />,
 		},
 		{
-			path: "/register",
+			path: PATH.TO__REGISTER_PAGE,
 			element: user ? <Home /> : <RegisterPage />,
 		},
 		{
-			path: "/new-blog",
+			path: PATH.TO__BLOG_CREATE_PAGE,
 			element: user ? <WriteBlogPage /> : <RegisterPage />,
 		},
 
 		{
-			path: "/blogs/:blogId",
+			path: PATH.TO__BLOG_SINGLE_PAGE,
 			element: <SinglePage />,
 		},
 		{
-			path: "/user/settings",
+			path: PATH.TO__USER_PROFILE_PAGE,
 			element: user ? <Settings /> : <RegisterPage />,
 		},
 		{
 			path: "*",
-			element: <h1>No page here</h1>,
+			element: <h1>404 This Page NOT EXIST!</h1>,
 		},
 	];
 };
