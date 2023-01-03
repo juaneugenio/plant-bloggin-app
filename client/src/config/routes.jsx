@@ -9,7 +9,7 @@ import Settings from "../pages/settingsProfile/SettingsProfile";
 
 const routes = (props) => {
 	// const { user } = props;
-	const user = false;
+	const user = true;
 	return [
 		{
 			path: PATH.TO__HOME_PAGE,

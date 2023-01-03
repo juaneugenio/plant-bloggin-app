@@ -1,8 +1,35 @@
 /** @format */
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./settingsProfile.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 
 const Settings = () => {
+	const { userId } = useParams();
+
+	const [singleUser, setSingleUser] = useState({});
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const singleUserURL = `http://localhost:3000/api/users/${userId}`;
+		const fetchSingleUser = async () => {
+			try {
+				const response = await axios.get(singleUserURL);
+				console.log("%c UserDB▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data.user);
+				setSingleUser(response.data.user);
+			} catch (error) {
+				setError("UserID does not exist or Server");
+				console.log(
+					"%c error ▶︎ ",
+					"font-size:13px; background:#993441; color:#ffb8b1;",
+					"UserID does not exist or Server",
+					error.message,
+				);
+			}
+		};
+		fetchSingleUser();
+	}, []);
 	return (
 		<div className="settingsPage">
 			<div className="settingsWrapper">
@@ -33,7 +60,7 @@ const Settings = () => {
 					</button>
 				</form>
 			</div>
-			<Sidebar />
+			<Sidebar user={singleUser} />
 		</div>
 	);
 };

@@ -2,11 +2,14 @@
 
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
 
 const User = require("../models/User.model");
 const saltRounds = 10;
 
+// router.get("/register", (req, res, next) => {
+// 	console.log("▶︎▶︎▶︎ File: authen.routes ▶︎▶︎", { dat: req.body });
+// 	res.json({ dat: req.body });
+// });
 router.post("/register", async (req, res) => {
 	const { username, password, email } = req.body;
 	if (!username || username.length < 3) {
