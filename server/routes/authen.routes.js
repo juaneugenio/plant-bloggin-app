@@ -13,14 +13,14 @@ const saltRounds = 10;
 router.post("/register", async (req, res) => {
 	const { username, password, email } = req.body;
 	if (!username || username.length < 3) {
-		return res.status(400).json({ errorMessage: "Please provide your username with more than 3 characters." });
+		return res.status(400).json({ errorMessage: "Provide a username with more than 3 characters." });
+	}
+	const emailRegex = /^\S+@\S+\.\S+$/;
+	if (!emailRegex.test(email)) {
+		return res.status(400).json({ errorMessage: "Please provide a valid email." });
 	}
 
-	if (!email) {
-		return res.status(400).json({ errorMessage: "Please provide your email." });
-	}
-
-	if (password.length < 6) {
+	if (!password || password.length < 6) {
 		return res.status(400).json({
 			errorMessage: "Your password needs to be at least 6 characters long.",
 		});
@@ -47,11 +47,11 @@ router.post("/register", async (req, res) => {
 					password: hashedPassword,
 				});
 				await newUser.save();
-				res.status(200).json({ newUser });
+				res.status(200).json(newUser);
 			}
 		});
 	} catch (err) {
-		res.status(500).json({ message: err.message });
+		res.status(500).json(err);
 	}
 });
 
