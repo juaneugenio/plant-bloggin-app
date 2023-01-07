@@ -15,6 +15,7 @@ const RegisterPage = () => {
 	const { username, password, email } = form;
 	const [error, setError] = useState(false);
 	const navigate = useNavigate();
+
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		return setForm({ ...form, [name]: value });
@@ -30,7 +31,7 @@ const RegisterPage = () => {
 			const { password, ...rest } = newUser.data;
 			console.log("%c Created USER for test ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", rest);
 
-			navigate(PATH.TO__HOME_PAGE);
+			newUser.data && navigate(PATH.TO__HOME_PAGE);
 		} catch (error) {
 			console.log(
 				"%c error ▶︎ ",
