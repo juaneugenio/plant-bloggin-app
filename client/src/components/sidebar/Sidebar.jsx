@@ -1,6 +1,6 @@
 /** @format */
 import "./sidebar.css";
-const Sidebar = ({ user }) => {
+const Sidebar = () => {
 	return (
 		<div className="sidebar">
 			<div className="sidebarItem">
@@ -9,7 +9,7 @@ const Sidebar = ({ user }) => {
 					src="https://i.pinimg.com/736x/bb/dc/b9/bbdcb9d2577299a990103330cb6c0e7b--curly-afro-kinky-curly.jpg"
 					alt="about me user picture"
 				/>
-				<p>{user.username}</p>
+				<p>useername</p>
 				<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, sapiente sint. </p>
 			</div>
 			<div className="sidebarItem">

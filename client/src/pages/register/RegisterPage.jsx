@@ -13,7 +13,7 @@ const RegisterPage = () => {
 		email: "",
 	});
 	const { username, password, email } = form;
-	const [error, setError] = useState(null);
+	const [error, setError] = useState(false);
 	const navigate = useNavigate();
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -22,31 +22,30 @@ const RegisterPage = () => {
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
+		setError(false);
 		const credentials = { ...form };
 
 		try {
 			const newUser = await axios.post("http://localhost:3000/api/auth/register", credentials);
-			console.log(
-				"%c newUser ▶︎ ",
-				"font-size:13px; background:#993441; color:#ffb8b1;",
-				"New User sended",
-				newUser.data,
-			);
+			const { password, ...rest } = newUser.data;
+			console.log("%c Created USER for test ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", rest);
+
 			navigate(PATH.TO__HOME_PAGE);
 		} catch (error) {
 			console.log(
 				"%c error ▶︎ ",
 				"font-size:13px; background:#993441; color:#ffb8b1;",
-				"User Unsucceful created=>",
-				error.message,
+				"User Unsucceful created because=>",
+				error.response.data.errorMessage,
 			);
-			setError(error.message);
+			setError(error.response.data);
 		}
 	};
 
 	return (
 		<div className="registerContainer">
 			<span className="registerTitle">Register</span>
+			{error && <span className="errorStyle">{error.errorMessage}</span>}
 			<form onSubmit={handleFormSubmit} className="registerForm">
 				<label>Username</label>
 				<input
