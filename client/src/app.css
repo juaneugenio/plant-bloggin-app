@@ -10,8 +10,8 @@
 	color: inherit;
 }
 .errorStyle {
-	background-color: rgb(255, 0, 0);
-	color: white;
+	background-color: rgb(47, 44, 44);
+	color: rgb(110, 239, 4);
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	width: 13rem;
 	text-align: center;
