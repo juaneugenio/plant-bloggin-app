@@ -8,8 +8,7 @@ import WriteBlogPage from "../pages/write/WriteBlogPage";
 import Settings from "../pages/settingsProfile/SettingsProfile";
 
 const routes = (props) => {
-	// const { user } = props;
-	const user = false;
+	const { user } = props;
 	return [
 		{
 			path: PATH.TO__HOME_PAGE,
@@ -17,11 +16,11 @@ const routes = (props) => {
 		},
 		{
 			path: PATH.TO__LOGIN_PAGE,
-			element: user ? <Home /> : <LoginPage />,
+			element: <LoginPage {...props} />,
 		},
 		{
 			path: PATH.TO__REGISTER_PAGE,
-			element: user ? <Home /> : <RegisterPage />,
+			element: <RegisterPage />,
 		},
 		{
 			path: PATH.TO__BLOG_CREATE_PAGE,
