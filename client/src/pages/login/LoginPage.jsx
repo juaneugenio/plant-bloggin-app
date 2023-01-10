@@ -1,6 +1,7 @@
 /** @format */
 import axios from "axios";
 import * as PATH from "../../utils/paths";
+import { login } from "../../services/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -26,7 +27,8 @@ const LoginPage = ({ userAuthenticated }) => {
 		const credentials = { ...form };
 
 		try {
-			const response = await axios.post("http://localhost:3000/api/auth/login", credentials);
+			// const response = await axios.post("http://localhost:3000/api/auth/login", credentials);
+			const response = login(credentials);
 			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data.user);
 			if (!response.status) {
 				setError("Not response from Server in Login Form");

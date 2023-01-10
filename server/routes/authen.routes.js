@@ -3,6 +3,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
+const isLoggedOUT = require("../middlewares/isLoggedOUT");
+
 const User = require("../models/User.model");
 const Session = require("../models/Session.model");
 const saltRounds = 10;
@@ -57,7 +59,7 @@ router.post("/register", async (req, res) => {
 });
 
 //LOGIN
-router.post("/login", async (req, res) => {
+router.post("/login", isLoggedOUT, async (req, res) => {
 	const { email, password } = req.body;
 	const emailRegex = /^\S+@\S+\.\S+$/;
 	if (!emailRegex.test(email)) {
@@ -78,12 +80,21 @@ router.post("/login", async (req, res) => {
 		!passValidation && res.status(400).json({ errorMessage: "⚠️ Wrong credentials! Please, check again!" });
 
 		const userInSession = await Session.create({ user: user._id, createdAt: Date.now() });
-		console.log("%c userInSession ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", userInSession);
 
 		res.status(200).json({ user, accessToken: userInSession._id });
 	} catch (err) {
 		console.log("%c err500 ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", err.message);
 		res.status(500).json({ "Error500:": err.message });
+	}
+});
+
+//LOGOUT
+router.delete("/logout", async (req, res) => {
+	try {
+		await Session.findByIdAndDelete(req.headers.authorization);
+		res.json(true);
+	} catch (error) {
+		res.json(true);
 	}
 });
 
