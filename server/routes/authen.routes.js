@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 
 		res.status(200).json({ user, accessToken: userInSession._id });
 	} catch (err) {
-		console.log("%c err500 ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", err);
+		console.log("%c err500 ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", err.message);
 		res.status(500).json({ "Error500:": err.message });
 	}
 });

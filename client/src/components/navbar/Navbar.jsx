@@ -4,8 +4,9 @@ import "./navbar.css";
 import * as PATH from "../../utils/paths";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
-	const user = false;
+const Navbar = ({ user }) => {
+	// const user = false;
+
 	return (
 		<nav className="navbar">
 			<div className="topLeft">

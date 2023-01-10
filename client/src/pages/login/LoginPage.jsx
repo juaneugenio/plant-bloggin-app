@@ -5,7 +5,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./loginPage.css";
-const LoginPage = () => {
+
+const LoginPage = ({ userAuthenticated }) => {
 	const [form, setForm] = useState({
 		email: "",
 		password: "",
@@ -26,9 +27,12 @@ const LoginPage = () => {
 
 		try {
 			const response = await axios.post("http://localhost:3000/api/auth/login", credentials);
-			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data);
-
-			response.data && navigate(PATH.TO__HOME_PAGE);
+			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data.user);
+			if (!response.status) {
+				setError("Not response from Server in Login Form");
+			}
+			userAuthenticated(response.data.user);
+			navigate(PATH.TO__HOME_PAGE);
 		} catch (error) {
 			console.log(
 				"%c error ▶︎ ",
