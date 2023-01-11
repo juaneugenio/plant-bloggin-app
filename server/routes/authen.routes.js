@@ -8,21 +8,32 @@ const isLoggedOUT = require("../middlewares/isLoggedOUT");
 const User = require("../models/User.model");
 const Session = require("../models/Session.model");
 const saltRounds = 10;
-
+//Register get
+router.get("/register", (req, res) => {
+	res.send("register");
+});
 //SESSION
-router.get("/session", async (req, res, next) => {
+router.get("/session", (req, res) => {
+	// we dont want to throw an error, and just maintain the user as null
 	if (!req.headers.authorization) {
 		return res.json(null);
 	}
-	const accesToken = req.headers.authorization;
-	const session = await Session.findById(accesToken).populate("user");
-	!session && res.status(400).json({ errorMessage: "⚠️ Session does not exist" });
-	console.log("%c session ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", session);
 
-	res.status(200).json(session);
+	// accessToken is being sent on every request in the headers
+	const accessToken = req.headers.authorization;
+
+	Session.findById(accessToken)
+		.populate("user")
+		.then((session) => {
+			if (!session) {
+				return res.status(404).json({ errorMessage: "Session does not exist" });
+			}
+			return res.status(200).json(session);
+		});
 });
+
 //REGISTER
-router.post("/register", async (req, res) => {
+router.post("/register", (req, res) => {
 	const { username, password, email } = req.body;
 	if (!username || username.length < 3) {
 		return res.status(400).json({ errorMessage: "Provide a username with more than 3 characters." });
@@ -38,24 +49,45 @@ router.post("/register", async (req, res) => {
 		});
 	}
 
-	try {
-		User.findOne({ email }, async (err, doc) => {
-			if (err) throw err;
-			if (doc) res.status(400).json({ errorMessage: "User with this Email already exist" });
-			if (!doc) {
-				const hashedPassword = await bcrypt.hash(password, saltRounds);
-				const newUser = new User({
+	User.findOne({ email }).then((emailFounded) => {
+		// If the user is found, send the message username is taken
+		if (emailFounded) {
+			return res.status(400).json({ errorMessage: "Email already taken." });
+		}
+
+		// if user is not found, create a new user - start with hashing the password
+		return bcrypt
+			.genSalt(saltRounds)
+			.then((salt) => bcrypt.hash(password, salt))
+			.then((hashedPassword) => {
+				// Create a user and save it in the database
+				return User.create({
 					username,
 					email,
 					password: hashedPassword,
 				});
-				await newUser.save();
-				res.status(200).json(newUser);
-			}
-		});
-	} catch (err) {
-		res.status(500).json(err);
-	}
+			})
+			.then((user) => {
+				Session.create({
+					user: user._id,
+					createdAt: Date.now(),
+				}).then((session) => {
+					console.log("%c session ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", session);
+					res.status(201).json({ user, accessToken: session._id });
+				});
+			})
+			.catch((error) => {
+				if (error instanceof mongoose.Error.ValidationError) {
+					return res.status(400).json({ errorMessage: error.message });
+				}
+				if (error.code === 11000) {
+					return res.status(400).json({
+						errorMessage: "Email needs to be unique. The email you chose is already in use.",
+					});
+				}
+				return res.status(500).json({ errorMessage: error.message });
+			});
+	});
 });
 
 //LOGIN

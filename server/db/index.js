@@ -7,6 +7,9 @@ const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/plant-blog";
 mongoose
 	.connect(MONGO_URI)
 	.then((x) => {
+		if (!x) {
+			console.log("▶︎▶︎▶︎ File: index ▶︎▶︎", "No conexio with DB");
+		}
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
 	})
 	.catch((err) => {
