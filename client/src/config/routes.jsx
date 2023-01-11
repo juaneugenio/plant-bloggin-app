@@ -20,7 +20,7 @@ const routes = (props) => {
 		},
 		{
 			path: PATH.TO__REGISTER_PAGE,
-			element: <RegisterPage />,
+			element: <RegisterPage {...props} />,
 		},
 		{
 			path: PATH.TO__BLOG_CREATE_PAGE,

@@ -28,8 +28,9 @@ const LoginPage = ({ userAuthenticated }) => {
 
 		try {
 			// const response = await axios.post("http://localhost:3000/api/auth/login", credentials);
-			const response = login(credentials);
-			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data.user);
+			const response = await login(credentials);
+			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response);
+
 			if (!response.status) {
 				setError("Not response from Server in Login Form");
 			}

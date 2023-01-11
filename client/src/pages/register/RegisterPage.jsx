@@ -1,11 +1,13 @@
 /** @format */
 import axios from "axios";
-import * as PATH from "../../utils/paths";
+import { signup } from "../../services/auth";
 import { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
+import * as PATH from "../../utils/paths";
+import * as USER_HELPERS from "../../utils/userToken";
+
 import "./registerPage.css";
-const RegisterPage = () => {
+const RegisterPage = ({ userAuthenticated }) => {
 	//////
 	const [form, setForm] = useState({
 		username: "",
@@ -21,32 +23,30 @@ const RegisterPage = () => {
 		return setForm({ ...form, [name]: value });
 	};
 
-	const handleFormSubmit = async (event) => {
+	const handleFormSubmit = (event) => {
 		event.preventDefault();
 		setError(false);
 		const credentials = { ...form };
 
-		try {
-			const newUser = await axios.post("http://localhost:3000/api/auth/register", credentials);
-			const { password, ...rest } = newUser.data;
-			console.log("%c Created USER for test ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", rest);
-
-			newUser.data && navigate(PATH.TO__HOME_PAGE);
-		} catch (error) {
-			console.log(
-				"%c error ▶︎ ",
-				"font-size:13px; background:#993441; color:#ffb8b1;",
-				"User Unsucceful created because=>",
-				error.response.data.errorMessage,
-			);
-			setError(error.response.data);
-		}
+		signup(credentials).then((res) => {
+			if (!res.status) {
+				// unsuccessful signup
+				console.error("Signup was unsuccessful: ", res);
+				return setError({
+					message: "Register data incorrect! Please send valid information!",
+				});
+			}
+			// successful signup
+			USER_HELPERS.setUserToken(res.data.accessToken);
+			userAuthenticated(res.data.user);
+			navigate(PATH.TO__HOME_PAGE);
+		});
 	};
 
 	return (
 		<div className="registerContainer">
 			<span className="registerTitle">Register</span>
-			{error && <span className="errorStyle">{error.errorMessage}</span>}
+			{error && <span className="errorStyle">{error.message}</span>}
 			<form onSubmit={handleFormSubmit} className="registerForm">
 				<label>Username</label>
 				<input
