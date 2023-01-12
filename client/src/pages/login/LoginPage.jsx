@@ -1,6 +1,7 @@
 /** @format */
 import axios from "axios";
 import * as PATH from "../../utils/paths";
+import * as USER_HELPERS from "../../utils/userToken";
 import { login } from "../../services/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,36 +22,25 @@ const LoginPage = ({ userAuthenticated }) => {
 		return setForm({ ...form, [name]: value });
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		setError(false);
 		const credentials = { ...form };
-
-		try {
-			// const response = await axios.post("http://localhost:3000/api/auth/login", credentials);
-			const response = await login(credentials);
+		login(credentials).then((response) => {
 			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response);
-
 			if (!response.status) {
-				setError("Not response from Server in Login Form");
+				return setError({ message: response.errorMessage });
 			}
+			USER_HELPERS.setUserToken(response.data.accessToken);
 			userAuthenticated(response.data.user);
 			navigate(PATH.TO__HOME_PAGE);
-		} catch (error) {
-			console.log(
-				"%c error ▶︎ ",
-				"font-size:13px; background:#993441; color:#ffb8b1;",
-				"Wrong Credentials because =>",
-				error,
-			);
-			setError(error.response.data);
-		}
+		});
 	};
 
 	return (
 		<div className="loginContainer">
 			<span className="loginTitle">Login</span>
-			{error && <span className="errorStyle">{error.errorMessage}</span>}
+			{error && <span className="errorStyle">{error.message}</span>}
 			<form className="loginForm" onSubmit={handleSubmit}>
 				<label>E-mail</label>
 				<input

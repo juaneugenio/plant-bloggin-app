@@ -49,12 +49,7 @@ export function getLoggedIn() {
 export function signup(credentials) {
 	return authService.post("/register", credentials).then(successStatus).catch(internalServerError);
 }
-// export function signup(credentials) {
-// 	return axios
-// 		.post("http://localhost:3000/api/auth/register", credentials)
-// 		.then(successStatus)
-// 		.catch(internalServerError);
-// }
+
 export function logout() {
 	return authService
 		.delete("/logout", {
