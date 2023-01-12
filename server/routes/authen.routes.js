@@ -4,10 +4,12 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
 const isLoggedOUT = require("../middlewares/isLoggedOUT");
+const isLoggedIN = require("../middlewares/isLoggedIN");
 
 const User = require("../models/User.model");
 const Session = require("../models/Session.model");
 const saltRounds = 10;
+
 //Register get
 router.get("/register", (req, res) => {
 	res.send("register");
@@ -33,7 +35,7 @@ router.get("/session", (req, res) => {
 });
 
 //REGISTER
-router.post("/register", (req, res) => {
+router.post("/register", isLoggedOUT, (req, res) => {
 	const { username, password, email } = req.body;
 	if (!username || username.length < 3) {
 		return res.status(400).json({ errorMessage: "Provide a username with more than 3 characters." });
@@ -103,21 +105,39 @@ router.post("/login", isLoggedOUT, async (req, res) => {
 			errorMessage: "⚠️ Your password needs to be at least 6 characters long.",
 		});
 	}
-	try {
-		const formPassword = req.body.password;
-		const user = await User.findOne({ email });
-		!user && res.status(400).json({ errorMessage: "⚠️ You don't have an Account yet. Please Register" });
+	User.findOne({ email })
+		.then((userFounded) => {
+			// If the user isn't found, send the message that user provided wrong credentials
+			if (!userFounded) {
+				return res.status(400).json({ errorMessage: "⚠️ You don't have an Account yet. Please Register" });
+			}
+			bcrypt.compare(password, userFounded.password).then((isSamePassword) => {
+				if (!isSamePassword) {
+					return res.status(400).json({ errorMessage: "⚠️ Wrong credentials." });
+				}
+				Session.create({ user: userFounded._id, createdAt: Date.now() }).then((session) => {
+					return res.json({ user, accessToken: session._id });
+				});
+			});
+		})
+		.catch((error) => {
+			return res.status(500).render("login", { errorMessage: error.message });
+		});
+	// try {
+	// 	const formPassword = req.body.password;
+	// 	const user = await User.findOne({ email });
+	// 	!user && res.status(400).json({ errorMessage:  });
 
-		const passValidation = await bcrypt.compare(formPassword, user.password);
-		!passValidation && res.status(400).json({ errorMessage: "⚠️ Wrong credentials! Please, check again!" });
+	// 	const passValidation = await bcrypt.compare(formPassword, user.password);
+	// 	!passValidation && res.status(400).json({ errorMessage: "⚠️ Wrong credentials! Please, check again!" });
 
-		const userInSession = await Session.create({ user: user._id, createdAt: Date.now() });
+	// 	const userInSession = await Session.create({ user: user._id, createdAt: Date.now() });
 
-		res.status(200).json({ user, accessToken: userInSession._id });
-	} catch (err) {
-		console.log("%c err500 ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", err.message);
-		res.status(500).json({ "Error500:": err.message });
-	}
+	// 	res.status(200).json({ user, accessToken: userInSession._id });
+	// } catch (err) {
+	// 	console.log("%c err500 ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", err.message);
+	// 	return res.status(500).json("login", { "Error500:": err.message });
+	// }
 });
 
 //LOGOUT

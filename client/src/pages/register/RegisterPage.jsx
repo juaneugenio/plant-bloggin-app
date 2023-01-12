@@ -29,11 +29,12 @@ const RegisterPage = ({ userAuthenticated }) => {
 		const credentials = { ...form };
 
 		signup(credentials).then((res) => {
+			console.log("%c res ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", res);
 			if (!res.status) {
 				// unsuccessful signup
 				console.error("Signup was unsuccessful: ", res);
 				return setError({
-					message: "Register data incorrect! Please send valid information!",
+					message: res.errorMessage,
 				});
 			}
 			// successful signup

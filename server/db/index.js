@@ -8,7 +8,7 @@ mongoose
 	.connect(MONGO_URI)
 	.then((x) => {
 		if (!x) {
-			console.log("▶︎▶︎▶︎ File: index ▶︎▶︎", "No conexio with DB");
+			console.log("▶︎▶︎▶︎ File: index ▶︎▶︎", "No connection to DB");
 		}
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
 	})
