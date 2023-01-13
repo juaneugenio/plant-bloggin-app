@@ -27,7 +27,6 @@ const LoginPage = ({ userAuthenticated }) => {
 		setError(false);
 		const credentials = { ...form };
 		login(credentials).then((response) => {
-			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response);
 			if (!response.status) {
 				return setError({ message: response.errorMessage });
 			}

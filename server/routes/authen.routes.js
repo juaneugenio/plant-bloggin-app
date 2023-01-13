@@ -93,7 +93,7 @@ router.post("/register", isLoggedOUT, (req, res) => {
 });
 
 //LOGIN
-router.post("/login", isLoggedOUT, async (req, res) => {
+router.post("/login", isLoggedOUT, (req, res) => {
 	const { email, password } = req.body;
 	const emailRegex = /^\S+@\S+\.\S+$/;
 	if (!emailRegex.test(email)) {
@@ -106,16 +106,16 @@ router.post("/login", isLoggedOUT, async (req, res) => {
 		});
 	}
 	User.findOne({ email })
-		.then((userFounded) => {
+		.then((user) => {
 			// If the user isn't found, send the message that user provided wrong credentials
-			if (!userFounded) {
+			if (!user) {
 				return res.status(400).json({ errorMessage: "⚠️ You don't have an Account yet. Please Register" });
 			}
-			bcrypt.compare(password, userFounded.password).then((isSamePassword) => {
+			bcrypt.compare(password, user.password).then((isSamePassword) => {
 				if (!isSamePassword) {
 					return res.status(400).json({ errorMessage: "⚠️ Wrong credentials." });
 				}
-				Session.create({ user: userFounded._id, createdAt: Date.now() }).then((session) => {
+				Session.create({ user: user._id, createdAt: Date.now() }).then((session) => {
 					return res.json({ user, accessToken: session._id });
 				});
 			});
