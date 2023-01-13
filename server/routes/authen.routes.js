@@ -30,6 +30,7 @@ router.get("/session", (req, res) => {
 			if (!session) {
 				return res.status(404).json({ errorMessage: "Session does not exist" });
 			}
+
 			return res.status(200).json(session);
 		});
 });
@@ -123,31 +124,18 @@ router.post("/login", isLoggedOUT, (req, res) => {
 		.catch((error) => {
 			return res.status(500).render("login", { errorMessage: error.message });
 		});
-	// try {
-	// 	const formPassword = req.body.password;
-	// 	const user = await User.findOne({ email });
-	// 	!user && res.status(400).json({ errorMessage:  });
-
-	// 	const passValidation = await bcrypt.compare(formPassword, user.password);
-	// 	!passValidation && res.status(400).json({ errorMessage: "⚠️ Wrong credentials! Please, check again!" });
-
-	// 	const userInSession = await Session.create({ user: user._id, createdAt: Date.now() });
-
-	// 	res.status(200).json({ user, accessToken: userInSession._id });
-	// } catch (err) {
-	// 	console.log("%c err500 ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", err.message);
-	// 	return res.status(500).json("login", { "Error500:": err.message });
-	// }
 });
 
 //LOGOUT
-router.delete("/logout", async (req, res) => {
-	try {
-		await Session.findByIdAndDelete(req.headers.authorization);
-		res.json(true);
-	} catch (error) {
-		res.json(true);
-	}
+router.delete("/logout", isLoggedIN, (req, res) => {
+	Session.findByIdAndDelete(req.headers.authorization)
+		.then(() => {
+			res.status(200).json({ message: "User was logged out" });
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json({ errorMessage: err.message });
+		});
 });
 
 module.exports = router;
