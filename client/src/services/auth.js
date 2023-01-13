@@ -35,11 +35,11 @@ export function login(credentials) {
 	return authService.post("/login", credentials).then(successStatus).catch(internalServerError);
 }
 
-export function getLoggedIn() {
+export function getLoggedIn(accessToken) {
 	return authService
-		.get(`session`, {
+		.get("/session", {
 			headers: {
-				Authorization: USER_HELPERS.getUserToken(),
+				authorization: USER_HELPERS.getUserToken(accessToken),
 			},
 		})
 		.then(successStatus)
@@ -54,7 +54,7 @@ export function logout() {
 	return authService
 		.delete("/logout", {
 			headers: {
-				Authorization: USER_HELPERS.getUserToken(),
+				authorization: USER_HELPERS.getUserToken(),
 			},
 		})
 		.then(successStatus)
