@@ -21,7 +21,7 @@ function App() {
 		setUser(userData);
 	};
 	function logginOUT() {
-		logout().finally(() => {
+		logout().finally((req) => {
 			removeAccessToken();
 			setUser(undefined);
 		});
@@ -33,8 +33,6 @@ function App() {
 			return setIsLoading(false);
 		}
 		getLoggedIn(accessToken).then((response) => {
-			console.log("%c response ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response);
-
 			if (!response.status) {
 				return setIsLoading(false);
 			}

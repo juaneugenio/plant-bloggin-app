@@ -7,7 +7,7 @@ const postsRoutes = require("./posts.routes");
 const userRoutes = require("./user.routes");
 
 router.get("/", (req, res) => {
-	res.send("Root path whit api prefix: ...api/");
+	res.send("Rootpath whit api prefix: ...api/");
 });
 
 router.use("/auth", authRoutes);

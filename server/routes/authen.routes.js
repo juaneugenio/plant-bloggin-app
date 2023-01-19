@@ -30,14 +30,13 @@ router.get("/session", (req, res) => {
 			if (!session) {
 				return res.status(404).json({ errorMessage: "Session does not exist" });
 			}
-
 			return res.status(200).json(session);
 		});
 });
 
 //REGISTER
 router.post("/register", isLoggedOUT, (req, res) => {
-	const { username, password, email } = req.body;
+	const { username, password, email, userDescription, profileImage } = req.body;
 	if (!username || username.length < 3) {
 		return res.status(400).json({ errorMessage: "Provide a username with more than 3 characters." });
 	}
@@ -68,6 +67,8 @@ router.post("/register", isLoggedOUT, (req, res) => {
 					username,
 					email,
 					password: hashedPassword,
+					userDescription,
+					profileImage,
 				});
 			})
 			.then((user) => {

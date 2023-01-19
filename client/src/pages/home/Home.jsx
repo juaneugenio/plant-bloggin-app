@@ -5,7 +5,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Posts from "../../components/posts/Posts";
 import axios from "axios";
 import { useEffect, useState } from "react";
-const Home = () => {
+const Home = ({ user }) => {
 	const [posts, setPosts] = useState([]);
 	useEffect(() => {
 		const fetchingPosts = async () => {
@@ -28,7 +28,7 @@ const Home = () => {
 			<Header />
 			<div className="home">
 				<Posts posts={posts} />
-				<Sidebar />
+				<Sidebar user={user} />
 			</div>
 		</>
 	);
