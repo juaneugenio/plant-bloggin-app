@@ -36,11 +36,7 @@ const Navbar = ({ user, logginOUT }) => {
 			<div className="topRight">
 				{user ? (
 					<Link to={PATH.TO__USER_PROFILE_PAGE}>
-						<img
-							src="https://cdn.dribbble.com/users/1577045/screenshots/4914645/media/5146d1dbf9146c4d12a7249e72065a58.png"
-							alt="Photo Profile"
-							className="profileImg"
-						/>
+						<img src={user.profileImage} alt="Photo Profile" className="profileImg" />
 					</Link>
 				) : (
 					<>
