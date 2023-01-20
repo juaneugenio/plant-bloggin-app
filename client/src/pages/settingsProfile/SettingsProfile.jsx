@@ -4,34 +4,18 @@ import "./settingsProfile.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { updatingUser } from "../../services/userService";
 
 const Settings = ({ user }) => {
-	console.log("%c user ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", { user });
 	const userId = user._id;
 	console.log("%c userId ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", userId);
 
-	const [singleUser, setSingleUser] = useState({});
-	const [error, setError] = useState(null);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		updatingUser(user);
+		console.log("▶︎▶︎▶︎ File: SettingsProfile ▶︎▶︎", user);
+	};
 
-	// useEffect(() => {
-	// 	const singleUserURL = `http://localhost:3000/api/users/${userId}`;
-	// 	const fetchSingleUser = async () => {
-	// 		try {
-	// 			const response = await axios.get(singleUserURL);
-	// 			console.log("%c UserDB▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data.user);
-	// 			setSingleUser(response.data.user);
-	// 		} catch (error) {
-	// 			setError("UserID does not exist or Server");
-	// 			console.log(
-	// 				"%c error ▶︎ ",
-	// 				"font-size:13px; background:#993441; color:#ffb8b1;",
-	// 				"UserID does not exist or Server",
-	// 				error.message,
-	// 			);
-	// 		}
-	// 	};
-	// 	fetchSingleUser();
-	// }, []);
 	return (
 		<div className="settingsPage">
 			<div className="settingsWrapper">
@@ -43,7 +27,7 @@ const Settings = ({ user }) => {
 					Here you can edit and update your Profile Info if you need it, otherwise continue enjoying of our community
 					plants.
 				</p>
-				<form className="settingsForm">
+				<form className="settingsForm" onSubmit={handleSubmit}>
 					<label>Your current Profile Picture</label>
 					<div className="settingsPP">
 						<img src={user.profileImage} alt="" />
@@ -71,7 +55,7 @@ const Settings = ({ user }) => {
 					<label>Password</label>
 					<input type="password" placeholder="Type another Password to change the current passsword" name="password" />
 					<button className="settingsSubmitButton" type="submit">
-						Update
+						Submit changes
 					</button>
 				</form>
 			</div>

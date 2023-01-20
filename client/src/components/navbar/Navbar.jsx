@@ -28,16 +28,19 @@ const Navbar = ({ user, logginOUT }) => {
 					<Link to={PATH.TO__BLOG_CREATE_PAGE} className="linksCenter">
 						CREATE
 					</Link>
-					<Link to="#" className="linksCenter" onClick={logginOUT}>
-						{user && "LOGOUT"}
-					</Link>
+					<i className=" searchIcon material-symbols-outlined">search</i>
 				</ul>
 			</div>
 			<div className="topRight">
 				{user ? (
-					<Link to={PATH.TO__USER_PROFILE_PAGE}>
-						<img src={user.profileImage} alt="Photo Profile" className="profileImg" />
-					</Link>
+					<>
+						<Link to="#" className="linksCenter" onClick={logginOUT}>
+							{user && "LOGOUT"}
+						</Link>
+						<Link to={PATH.TO__USER_PROFILE_PAGE}>
+							<img src={user.profileImage} alt="Photo Profile" className="profileImg" />
+						</Link>
+					</>
 				) : (
 					<>
 						<Link to={PATH.TO__LOGIN_PAGE} className="linksCenter">
@@ -49,7 +52,6 @@ const Navbar = ({ user, logginOUT }) => {
 						</Link>
 					</>
 				)}
-				<i className=" searchIcon material-symbols-outlined">search</i>
 			</div>
 		</nav>
 	);

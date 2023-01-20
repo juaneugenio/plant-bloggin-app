@@ -29,7 +29,7 @@ const routes = (props) => {
 
 		{
 			path: PATH.TO__BLOG_SINGLE_PAGE,
-			element: <SinglePage />,
+			element: <SinglePage {...props} />,
 		},
 		{
 			path: PATH.TO__USER_PROFILE_PAGE,
