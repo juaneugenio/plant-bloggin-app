@@ -2,17 +2,18 @@
 
 const router = require("express").Router();
 const UserModel = require("../models/User.model");
+const isLoggedOUT = require("../middlewares/isLoggedOUT");
+const isLoggedIN = require("../middlewares/isLoggedIN");
 
-router.get("/:userId", async (req, res) => {
-	console.log("▶︎▶︎▶︎ File: user.routes ▶︎▶︎", req.body);
+// router.post("/my-account", (req, res, next) => {
+// 	const { _id } = req.body.user;
+// 	console.log("▶︎▶︎▶︎ File: user.routes ▶︎▶︎ REQ.BODY", _id);
+// });
+
+router.patch("/my-account", async (req, res) => {
 	try {
-		const { userId } = req.params;
-
-		const userFromDB = await UserModel.findOne({ _id: userId });
-		if (!userFromDB) {
-			return res.status(404).json({ message: `No User with Id: ${userId}` });
-		}
-		res.status(200).json({ user: userFromDB });
+		const { _id } = req.body.user;
+		console.log("%c _id ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", _id);
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}

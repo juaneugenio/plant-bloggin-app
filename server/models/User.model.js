@@ -25,7 +25,7 @@ const userSchema = new Schema(
 		},
 		userDescription: {
 			type: String,
-			default: "In your Account Page add some nice infos to describe your love for plants!",
+			default: "Add some nice infos to describe your love for plants!",
 			trim: true,
 		},
 	},
