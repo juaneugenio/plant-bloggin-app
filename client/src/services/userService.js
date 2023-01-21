@@ -8,9 +8,9 @@ const BASE_API_URL = `${import.meta.env.VITE_API_URI}/api/users`;
 
 const userService = axios.create({ baseURL: BASE_API_URL });
 
-export function updatingUser(userObj) {
+export function updatingUser(userFormData) {
 	return userService
-		.patch("/my-account", { userObj }, sendUser())
+		.patch("/my-account", { userFormData }, sendUser())
 		.then(onSuccess("Updated account"))
 		.catch(onError("Updated account"));
 }

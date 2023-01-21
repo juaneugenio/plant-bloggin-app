@@ -60,7 +60,7 @@ router.post("/register", isLoggedOUT, (req, res) => {
 		// if user is not found, create a new user - start with hashing the password
 		return bcrypt
 			.genSalt(saltRounds)
-			.then((salt) => bcrypt.hash(password, salt))
+			.then((salt) => bcrypt.hashSync(password, salt))
 			.then((hashedPassword) => {
 				// Create a user and save it in the database
 				return User.create({
