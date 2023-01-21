@@ -6,16 +6,46 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { updatingUser } from "../../services/userService";
 
+const userData = {
+	username: "",
+	email: "",
+	userDescription: "",
+	password: "",
+};
+
 const Settings = ({ user }) => {
 	const userId = user._id;
 	console.log("%c userId ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", userId);
+	const [userFormData, setUserFormData] = useState(userData);
+
+	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		updatingUser(user);
-		console.log("▶︎▶︎▶︎ File: SettingsProfile ▶︎▶︎", user);
-	};
+		setIsLoading(true);
+		setError(false);
 
+		if (!userFormData) {
+			setError("You are not editing anything. It's not necesary to submit! ");
+			setIsLoading(false);
+			return;
+		}
+		updatingUser(userFormData)
+			.then((response) => {
+				if (!response.success) {
+					return setError(response.data);
+				}
+				setUserFormData(response.data.userFormData);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setUserFormData({ ...userFormData, [name]: value });
+	};
 	return (
 		<div className="settingsPage">
 			<div className="settingsWrapper">
@@ -34,12 +64,31 @@ const Settings = ({ user }) => {
 						<label htmlFor="fileInput">
 							<span className="settingsPPIcon material-symbols-outlined">upload</span>
 						</label>
-						<input id="fileInput" type="file" style={{ display: "none" }} className="settingsPPInput" />
+						<input
+							id="fileInput"
+							type="file"
+							style={{ display: "none" }}
+							className="settingsPPInput"
+							// value={userFormData.title}
+							// onChange={handleChange}
+						/>
 					</div>
 					<label>Username</label>
-					<input type="text" placeholder={`Your current username is: ${user.username}`} name="name" />
+					<input
+						type="text"
+						placeholder={`Your current username is: ${user.username}`}
+						name="username"
+						value={userFormData.username}
+						onChange={handleChange}
+					/>
 					<label>Email</label>
-					<input type="email" placeholder={user.email} name="email" />
+					<input
+						type="email"
+						placeholder={user.email}
+						name="email"
+						value={userFormData.email}
+						onChange={handleChange}
+					/>
 					<label>Personal Description</label>
 					<textarea
 						type="text-field"
@@ -49,15 +98,24 @@ const Settings = ({ user }) => {
 								? user.userDescription
 								: "Describe yourself and your love for plants to make your account more special."
 						}
-						name="userDescription"
 						rows="5"
+						name="userDescription"
+						value={userFormData.userDescription}
+						onChange={handleChange}
 					></textarea>
 					<label>Password</label>
-					<input type="password" placeholder="Type another Password to change the current passsword" name="password" />
+					<input
+						type="password"
+						placeholder="Type another Password to change the current passsword"
+						name="password"
+						value={userFormData.password}
+						onChange={handleChange}
+					/>
 					<button className="settingsSubmitButton" type="submit">
 						Submit changes
 					</button>
 				</form>
+				{error && <p>{error}</p>}
 			</div>
 			<Sidebar user={user} />
 		</div>
