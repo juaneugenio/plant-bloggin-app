@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import "./settingsProfile.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { updatingUser } from "../../services/userService";
 
 const userData = {
@@ -15,33 +15,33 @@ const userData = {
 
 const Settings = ({ user }) => {
 	const userId = user._id;
-	console.log("%c userId ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", userId);
-	const [userFormData, setUserFormData] = useState(userData);
+
+	const [userFormData, setUserFormData] = useState(user);
 
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setError(false);
 
-		if (!userFormData) {
-			setError("You are not editing anything. It's not necesary to submit! ");
-			setIsLoading(false);
-			return;
-		}
 		updatingUser(userFormData)
 			.then((response) => {
 				if (!response.success) {
 					return setError(response.data);
 				}
-				setUserFormData(response.data.userFormData);
+
+				console.log("%c  USER ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data);
+				setUserFormData(response.data.user);
 			})
 			.finally(() => {
 				setIsLoading(false);
+				setUserFormData(userData);
 			});
 	};
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setUserFormData({ ...userFormData, [name]: value });
