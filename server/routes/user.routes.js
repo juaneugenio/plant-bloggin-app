@@ -26,11 +26,11 @@ router.patch("/my-account", isLoggedIN, (req, res) => {
 		return res.status(400).json({ errorMessage: "Provide a username with more than 3 characters." });
 	}
 	const emailRegex = /^\S+@\S+\.\S+$/;
-	if (!emailRegex.test(email)) {
+	if (email === "" || !emailRegex.test(email)) {
 		return res.status(400).json({ errorMessage: "Please provide a valid email." });
 	}
 
-	if (password.length < 6) {
+	if (password === "" || password.length < 6) {
 		return res.status(400).json({
 			errorMessage: "Your password needs to be at least 6 characters long.",
 		});
@@ -54,7 +54,7 @@ router.patch("/my-account", isLoggedIN, (req, res) => {
 			// console.log("CL 👉---", updatedUser);
 			res.status(200).json({ user: updatedUser });
 		})
-		.catch((error) => res.status(500).json({ message: "Something went wrong" }));
+		.catch((error) => res.status(500).json({ errorMessage: "Something went wrong", error }));
 });
 
 module.exports = router;
