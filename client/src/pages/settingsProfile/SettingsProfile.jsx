@@ -1,6 +1,7 @@
 /** @format */
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./settingsProfile.css";
+import * as PATH from "../../utils/paths";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ const userData = {
 const Settings = ({ user }) => {
 	const userId = user._id;
 
-	const [userFormData, setUserFormData] = useState(user);
+	const [userFormData, setUserFormData] = useState(userData);
 
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -34,11 +35,12 @@ const Settings = ({ user }) => {
 				}
 
 				console.log("%c  USER ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data);
+				window.location.reload();
 				setUserFormData(response.data.user);
 			})
 			.finally(() => {
 				setIsLoading(false);
-				setUserFormData(userData);
+				navigate(PATH.TO__HOME_PAGE);
 			});
 	};
 
