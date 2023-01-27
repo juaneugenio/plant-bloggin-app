@@ -7,17 +7,17 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { updatingUser } from "../../services/userService";
 
-const userData = {
+const userInForm = {
 	username: "",
 	email: "",
-	userDescription: "",
 	password: "",
+	userDescription: "",
+	profileImage: "",
 };
 
-const Settings = ({ user }) => {
+const Settings = ({ user, setUser }) => {
 	const userId = user._id;
-
-	const [userFormData, setUserFormData] = useState(userData);
+	const [newUser, setNewUser] = useState(userInForm);
 
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -28,15 +28,13 @@ const Settings = ({ user }) => {
 		setIsLoading(true);
 		setError(false);
 
-		updatingUser(userFormData)
+		updatingUser(newUser)
 			.then((response) => {
 				if (!response.success) {
 					return setError(response.data);
 				}
 
-				console.log("%c  USER ▶︎ ", "font-size:13px; background:#993441; color:#ffb8b1;", response.data);
-				window.location.reload();
-				setUserFormData(response.data.user);
+				setUser(response.data.user);
 			})
 			.finally(() => {
 				setIsLoading(false);
@@ -46,7 +44,7 @@ const Settings = ({ user }) => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setUserFormData({ ...userFormData, [name]: value });
+		setNewUser({ ...newUser, [name]: value });
 	};
 	return (
 		<div className="settingsPage">
@@ -62,7 +60,14 @@ const Settings = ({ user }) => {
 				<form className="settingsForm" onSubmit={handleSubmit}>
 					<label>Your current Profile Picture</label>
 					<div className="settingsPP">
-						<img src={user.profileImage} alt="" />
+						<img
+							src={
+								user.profileImage
+									? user.profileImage
+									: "https://imgs.search.brave.com/HAltpxU-sFVODYlpzIneugquzb8EAWr4WmbK6DVZnw4/rs:fit:512:512:1/g:ce/aHR0cHM6Ly9pczIt/c3NsLm16c3RhdGlj/LmNvbS9pbWFnZS90/aHVtYi9QdXJwbGUx/MjMvdjQvZjgvNDMv/ZDAvZjg0M2QwNWMt/MWIxZi04NGY4LWEz/YmQtY2E5YmFjZjA0/MzYzL3NvdXJjZS81/MTJ4NTEyYmIuanBn"
+							}
+							alt="User photo profile"
+						/>
 						<label htmlFor="fileInput">
 							<span className="settingsPPIcon material-symbols-outlined">upload</span>
 						</label>
@@ -71,26 +76,20 @@ const Settings = ({ user }) => {
 							type="file"
 							style={{ display: "none" }}
 							className="settingsPPInput"
-							// value={userFormData.title}
+							// value={user.title}
 							// onChange={handleChange}
 						/>
 					</div>
 					<label>Username</label>
 					<input
 						type="text"
-						placeholder={`Your current username is: ${user.username}`}
+						placeholder={user.username}
 						name="username"
-						value={userFormData.username}
+						value={newUser.username}
 						onChange={handleChange}
 					/>
 					<label>Email</label>
-					<input
-						type="email"
-						placeholder={user.email}
-						name="email"
-						value={userFormData.email}
-						onChange={handleChange}
-					/>
+					<input type="email" placeholder={user.email} name="email" value={newUser.email} onChange={handleChange} />
 					<label>Personal Description</label>
 					<textarea
 						type="text-field"
@@ -102,7 +101,7 @@ const Settings = ({ user }) => {
 						}
 						rows="5"
 						name="userDescription"
-						value={userFormData.userDescription}
+						value={newUser.userDescription}
 						onChange={handleChange}
 					></textarea>
 					<label>Password</label>
@@ -110,7 +109,7 @@ const Settings = ({ user }) => {
 						type="password"
 						placeholder="Type another Password to change the current passsword"
 						name="password"
-						value={userFormData.password}
+						value={newUser.password}
 						onChange={handleChange}
 					/>
 					<button className="settingsSubmitButton" type="submit">

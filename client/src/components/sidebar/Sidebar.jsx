@@ -8,7 +8,14 @@ const Sidebar = ({ user }) => {
 				<>
 					<div className="sidebarItem">
 						<span className="sidebarTitle">ABOUT ME</span>
-						<img src={user.profileImage} alt={`${user.username}'s profile picture.`} />
+						<img
+							src={
+								user.profileImage
+									? user.profileImage
+									: "https://imgs.search.brave.com/HAltpxU-sFVODYlpzIneugquzb8EAWr4WmbK6DVZnw4/rs:fit:512:512:1/g:ce/aHR0cHM6Ly9pczIt/c3NsLm16c3RhdGlj/LmNvbS9pbWFnZS90/aHVtYi9QdXJwbGUx/MjMvdjQvZjgvNDMv/ZDAvZjg0M2QwNWMt/MWIxZi04NGY4LWEz/YmQtY2E5YmFjZjA0/MzYzL3NvdXJjZS81/MTJ4NTEyYmIuanBn"
+							}
+							alt={`${user.username}'s profile picture.`}
+						/>
 						<p>{user.username}</p>
 						<p>{user.userDescription}</p>
 					</div>

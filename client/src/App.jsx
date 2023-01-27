@@ -49,7 +49,7 @@ function App() {
 		<>
 			<Navbar user={user} logginOUT={logginOUT} />
 			<Routes>
-				{routes({ user, userAuthenticated }).map((route) => (
+				{routes({ user, setUser, userAuthenticated }).map((route) => (
 					<Route key={route.path} path={route.path} element={route.element} />
 				))}
 			</Routes>
