@@ -38,7 +38,15 @@ const Navbar = ({ user, logginOUT }) => {
 							{user && "LOGOUT"}
 						</Link>
 						<Link to={PATH.TO__USER_PROFILE_PAGE}>
-							<img src={user.profileImage} alt="Photo Profile" className="profileImg" />
+							<img
+								src={
+									user.profileImage
+										? user.profileImage
+										: "https://imgs.search.brave.com/HAltpxU-sFVODYlpzIneugquzb8EAWr4WmbK6DVZnw4/rs:fit:512:512:1/g:ce/aHR0cHM6Ly9pczIt/c3NsLm16c3RhdGlj/LmNvbS9pbWFnZS90/aHVtYi9QdXJwbGUx/MjMvdjQvZjgvNDMv/ZDAvZjg0M2QwNWMt/MWIxZi04NGY4LWEz/YmQtY2E5YmFjZjA0/MzYzL3NvdXJjZS81/MTJ4NTEyYmIuanBn"
+								}
+								alt="Photo Profile"
+								className="profileImg"
+							/>
 						</Link>
 					</>
 				) : (
