@@ -4,7 +4,7 @@ import "./navbar.css";
 import * as PATH from "../../utils/paths";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ user, logginOUT }) => {
+const Navbar = ({ user, handleLogOut }) => {
 	// const user = false;
 
 	return (
@@ -34,7 +34,7 @@ const Navbar = ({ user, logginOUT }) => {
 			<div className="topRight">
 				{user ? (
 					<>
-						<Link to="#" className="linksCenter" onClick={logginOUT}>
+						<Link to="#" className="linksCenter" onClick={handleLogOut}>
 							{user && "LOGOUT"}
 						</Link>
 						<Link to={PATH.TO__USER_PROFILE_PAGE}>
