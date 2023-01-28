@@ -14,18 +14,9 @@ import Loading from "./components/loading/Loading";
 // import Settings from "./pages/settingsProfile/SettingsProfile";
 
 function App() {
-	const [user, setUser] = useState(undefined);
+	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
-	const userAuthenticated = (userData) => {
-		setUser(userData);
-	};
-	function logginOUT() {
-		logout().finally((req) => {
-			removeAccessToken();
-			setUser(undefined);
-		});
-	}
 	useEffect(() => {
 		const accessToken = USER_HELPERS.getUserToken();
 
@@ -36,10 +27,30 @@ function App() {
 			if (!response.status) {
 				return setIsLoading(false);
 			}
-			userAuthenticated(response.data.user);
+			setUser(response.data.user);
 			setIsLoading(false);
 		});
 	}, []);
+
+	function handleLogOut() {
+		const accessToken = USER_HELPERS.getUserToken();
+		if (!accessToken) {
+			setUser(null);
+			return setIsLoading(false);
+		}
+		setIsLoading(true);
+		logout(accessToken).then((response) => {
+			if (!response.status) {
+				console.log("LogOut unsuccesful", response);
+			}
+			USER_HELPERS.removeUserToken();
+			setIsLoading(false);
+			return setUser(null);
+		});
+	}
+	const userAuthenticated = (user) => {
+		setUser(user);
+	};
 
 	if (isLoading) {
 		return <Loading />;
@@ -47,9 +58,9 @@ function App() {
 
 	return (
 		<>
-			<Navbar user={user} logginOUT={logginOUT} />
+			<Navbar user={user} handleLogOut={handleLogOut} />
 			<Routes>
-				{routes({ user, setUser, userAuthenticated }).map((route) => (
+				{routes({ user, setUser, userAuthenticated, handleLogOut }).map((route) => (
 					<Route key={route.path} path={route.path} element={route.element} />
 				))}
 			</Routes>

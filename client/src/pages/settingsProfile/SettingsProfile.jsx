@@ -1,11 +1,11 @@
 /** @format */
 import Sidebar from "../../components/sidebar/Sidebar";
+import Loading from "../../components/loading/Loading";
 import "./settingsProfile.css";
 import * as PATH from "../../utils/paths";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { updatingUser } from "../../services/userService";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { updatingUser, deleteUser } from "../../services/userService";
 
 const userInForm = {
 	username: "",
@@ -46,12 +46,40 @@ const Settings = ({ user, setUser }) => {
 		const { name, value } = e.target;
 		setNewUser({ ...newUser, [name]: value });
 	};
+
+	//Deleting User
+	const handleDeleteUser = (e) => {
+		e.preventDefault();
+		setIsLoading(true);
+		deleteUser(user._id)
+			.then((response) => {
+				if (!response.success) {
+					return setError(response.data);
+				}
+				setUser(null);
+			})
+			.finally(() => {
+				if (error) {
+					return setIsLoading(false);
+				}
+				navigate(PATH.TO__HOME_PAGE);
+				window.location.reload(); //Check this! Whitout it, the page stays in cache??
+			});
+	};
+	if (isLoading) {
+		return <Loading />;
+	}
+
 	return (
 		<div className="settingsPage">
 			<div className="settingsWrapper">
 				<div className="settingsTitle">
 					<span className="settingsTitleUpdate">Your Account Page</span>
-					{user && <span className="settingsTitleDelete">Delete Account</span>}
+					{user && (
+						<span className="settingsTitleDelete" onClick={handleDeleteUser}>
+							Delete Account
+						</span>
+					)}
 				</div>
 				<p>
 					Here you can edit and update your Profile Info if you need it, otherwise continue enjoying of our community

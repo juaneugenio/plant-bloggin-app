@@ -1,7 +1,7 @@
 /** @format */
 
 import axios from "axios";
-import { SERVER_URL, sendUser } from "../utils/consts";
+import { SERVER_URL, sendUser, getAccessToken, removeAccessToken } from "../utils/consts";
 import { onSuccess, onError } from "../utils/serverResponseHandlers";
 
 const BASE_API_URL = `${import.meta.env.VITE_API_URI}/api/users`;
@@ -14,4 +14,18 @@ export function updatingUser(userFormData) {
 		.patch("/my-account", userFormData, sendUser())
 		.then(onSuccess("Updated account"))
 		.catch(onError("Updated account"));
+}
+
+export function deleteUser(userID) {
+	return userService
+		.delete(`/${userID}`, {
+			headers: {
+				authorization: getAccessToken(),
+			},
+		})
+		.then((response) => {
+			removeAccessToken();
+			return onSuccess("deleted-user", response);
+		})
+		.catch(onError("deleted-user"));
 }
