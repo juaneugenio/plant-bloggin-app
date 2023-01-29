@@ -56,14 +56,13 @@ const Settings = ({ user, setUser }) => {
 				if (!response.success) {
 					return setError(response.data);
 				}
-				setUser(null);
 			})
 			.finally(() => {
 				if (error) {
 					return setIsLoading(false);
 				}
-				navigate(PATH.TO__HOME_PAGE);
-				window.location.reload(); //Check this! Whitout it, the page stays in cache??
+				return setUser(null);
+				// navigate(PATH.TO__HOME_PAGE);
 			});
 	};
 	if (isLoading) {
