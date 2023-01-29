@@ -23,9 +23,9 @@ export function deleteUser(userID) {
 				authorization: getAccessToken(),
 			},
 		})
-		.then((response) => {
+		.then(() => {
 			removeAccessToken();
-			return onSuccess("deleted-user", response);
+			return onSuccess("deleted-user");
 		})
 		.catch(onError("deleted-user"));
 }

@@ -63,17 +63,12 @@ router.patch("/my-account", isLoggedIN, (req, res) => {
 //Delete User
 router.delete("/:userID", isLoggedIN, async (req, res, next) => {
 	const { userID } = req.params;
-	console.log("%c ▶︎▶︎ -65-「user」", "font-size:13px; background:#993441; color:#ffb8b1;", userID);
 
 	//To code when erasing the userspost with post Model File
 
 	const userSessionId = req.headers.authorization;
+
 	const userInSession = await Session.findById(userSessionId).populate("user");
-	console.log(
-		"%c ▶︎▶︎ -70-「user」",
-		"font-size:13px; background:#993441; color:#ffb8b1;",
-		userInSession.user._id.toString(),
-	);
 
 	if (userInSession.user._id.toString() !== userID) {
 		return res.status(404).json({
