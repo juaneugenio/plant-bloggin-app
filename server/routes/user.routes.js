@@ -1,6 +1,7 @@
 /** @format */
 
 const router = require("express").Router();
+const userImageUpload = require("../middlewares/cloudinary");
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/User.model");
 const Session = require("../models/Session.model");
@@ -14,7 +15,7 @@ const { response } = require("express");
 
 //Update User
 router.patch("/my-account", isLoggedIN, (req, res) => {
-	const { username, password, email, userDescription, profileImage } = req.body;
+	const { username, password, email, userDescription } = req.body;
 	const { _id } = req.user;
 
 	// if (email === _id.email) {
@@ -58,6 +59,25 @@ router.patch("/my-account", isLoggedIN, (req, res) => {
 			res.status(200).json({ user: updatedUser });
 		})
 		.catch((error) => res.status(500).json({ errorMessage: "Something went wrong", error }));
+});
+
+///// Update ROUTE for User Image/Photo profile. Uploading into Cloudinary
+
+router.patch("/updateProfileImage", isLoggedIN, userImageUpload.single("profileImage"), (req, res, next) => {
+	const { userId } = req.body;
+	UserModel.findByIdAndUpdate(userId, { profileImage: req.file.path }, { new: true })
+		.then((updatedUser) => {
+			res.status(200).json({
+				succes: true,
+				profileImage: updatedUser.profileImage,
+			});
+		})
+		.catch((error) => {
+			res.json({
+				succes: false,
+				errorMessage: error.message,
+			});
+		});
 });
 
 //Delete User
