@@ -5,7 +5,7 @@ import "./settingsProfile.css";
 import * as PATH from "../../utils/paths";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { updatingUser, deleteUser } from "../../services/userService";
+import { updatingUser, deleteUser, updateProfileImage } from "../../services/userService";
 
 const userInForm = {
 	username: "",
@@ -18,7 +18,8 @@ const userInForm = {
 const Settings = ({ user, setUser }) => {
 	const userId = user._id;
 	const [newUser, setNewUser] = useState(userInForm);
-
+	const [userPicture, setUserPicture] = useState("");
+	const [imageInputKey, setImageInputKey] = useState("");
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
@@ -27,20 +28,34 @@ const Settings = ({ user, setUser }) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setError(false);
+		if (!userPicture) {
+			return setError("Do not forget to choose a picture!");
+		}
+		const formToUpdate = new FormData();
+		formToUpdate.append("profileImage", userPicture);
+		formToUpdate.append();
 
 		updatingUser(newUser)
 			.then((response) => {
 				if (!response.success) {
-					return setError(response.data);
+					setError(response.data);
+					setIsLoading(false);
+					return;
 				}
 
 				setUser(response.data.user);
+				setIsLoading(false);
 			})
 			.finally(() => {
 				setIsLoading(false);
 				navigate(PATH.TO__HOME_PAGE);
 			});
 	};
+	///Image Input upload
+	function handleImageInput(event) {
+		// console.log(event.target.files[0]);
+		setUserPicture(event.target.files[0]);
+	}
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -61,8 +76,8 @@ const Settings = ({ user, setUser }) => {
 				if (error) {
 					return setIsLoading(false);
 				}
+				navigate(PATH.TO__HOME_PAGE);
 				return setUser(null);
-				// navigate(PATH.TO__HOME_PAGE);
 			});
 	};
 	if (isLoading) {
@@ -99,12 +114,13 @@ const Settings = ({ user, setUser }) => {
 							<span className="settingsPPIcon material-symbols-outlined">upload</span>
 						</label>
 						<input
+							key={imageInputKey}
 							id="fileInput"
 							type="file"
 							style={{ display: "none" }}
 							className="settingsPPInput"
 							// value={user.title}
-							// onChange={handleChange}
+							onChange={handleImageInput}
 						/>
 					</div>
 					<label>Username</label>

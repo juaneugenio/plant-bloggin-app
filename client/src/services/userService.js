@@ -15,6 +15,12 @@ export function updatingUser(userFormData) {
 		.then(onSuccess("Updated account"))
 		.catch(onError("Updated account"));
 }
+export function updateProfileImage(imageFile) {
+	return userService
+		.patch("/updateProfileImage", imageFile, sendUser())
+		.then(onSuccess("Updated Image Profile"))
+		.catch(onError("Updated Image Profile"));
+}
 
 export function deleteUser(userID) {
 	return userService
