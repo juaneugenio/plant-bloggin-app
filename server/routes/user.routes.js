@@ -15,7 +15,7 @@ const { response } = require("express");
 
 //Update User
 router.patch("/my-account", isLoggedIN, (req, res) => {
-	const { username, password, email, userDescription } = req.body;
+	const { username, password, email, userDescription, profileImage } = req.body;
 	const { _id } = req.user;
 
 	// if (email === _id.email) {
@@ -50,7 +50,7 @@ router.patch("/my-account", isLoggedIN, (req, res) => {
 			email,
 			password: hashedPassword,
 			userDescription,
-			profileImage,
+			// profileImage,
 		},
 		{ new: true },
 	)
@@ -67,6 +67,7 @@ router.patch("/updateProfileImage", isLoggedIN, userImageUpload.single("profileI
 	const { userId } = req.body;
 	UserModel.findByIdAndUpdate(userId, { profileImage: req.file.path }, { new: true })
 		.then((updatedUser) => {
+			console.log("%c ▶︎▶︎ -72-「user」", "font-size:13px; background:#993441; color:#ffb8b1;", updatedUser);
 			res.status(200).json({
 				succes: true,
 				profileImage: updatedUser.profileImage,
