@@ -15,7 +15,7 @@ import Loading from "./components/loading/Loading";
 
 function App() {
 	const [user, setUser] = useState(null);
-	console.log("%c ▶︎▶︎ -18-「Appjsx-USER」", "font-size:13px; background:#993441; color:#ffb8b1;", user);
+
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {

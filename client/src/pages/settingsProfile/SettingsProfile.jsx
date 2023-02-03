@@ -28,13 +28,16 @@ const Settings = ({ user, setUser }) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setError(false);
-		if (!userPicture) {
-			return setError("Do not forget to choose a picture!");
-		}
-		const formToUpdate = new FormData();
-		formToUpdate.append("profileImage", userPicture);
-		formToUpdate.append();
-
+		// if (!userPicture) {
+		// 	console.log("NO picture");
+		// 	setIsLoading(false);
+		// 	setError("Do not forget to choose a picture!");
+		// 	return;
+		// }
+		// const formToUpdate = new FormData();
+		// formToUpdate.append("profileImage", userPicture);
+		// formToUpdate.append("user", formToUpdate);
+		// console.log("2222formToUpdate", formToUpdate);
 		updatingUser(newUser)
 			.then((response) => {
 				if (!response.success) {
@@ -48,14 +51,37 @@ const Settings = ({ user, setUser }) => {
 			})
 			.finally(() => {
 				setIsLoading(false);
-				navigate(PATH.TO__HOME_PAGE);
 			});
 	};
 	///Image Input upload
-	function handleImageInput(event) {
+	const handleImageInput = (event) => {
 		// console.log(event.target.files[0]);
 		setUserPicture(event.target.files[0]);
-	}
+	};
+	const handleProfilePicture = (event) => {
+		event.preventDefault();
+		setIsLoading(true);
+		setError(false);
+		if (!userPicture) {
+			setError("Don't forget to choose your profile image!");
+			setIsLoading(false);
+			return;
+		}
+		const formBody = new FormData();
+		formBody.append("profileImage", userPicture); //profileImage  comes from index router.post
+		formBody.append("userId", userId);
+		updateProfileImage(formBody)
+			.then((response) => {
+				console.log("%c ▶︎▶︎ -73-「SettingsProfile」", "font-size:13px; background:#993441; color:#ffb8b1;", response);
+				if (!response.success) {
+					setError("Something is wrong");
+				}
+				setUser({ ...user, profileImage: response.data.profileImage });
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -102,14 +128,7 @@ const Settings = ({ user, setUser }) => {
 				<form className="settingsForm" onSubmit={handleSubmit}>
 					<label>Your current Profile Picture</label>
 					<div className="settingsPP">
-						<img
-							src={
-								user.profileImage
-									? user.profileImage
-									: "https://imgs.search.brave.com/HAltpxU-sFVODYlpzIneugquzb8EAWr4WmbK6DVZnw4/rs:fit:512:512:1/g:ce/aHR0cHM6Ly9pczIt/c3NsLm16c3RhdGlj/LmNvbS9pbWFnZS90/aHVtYi9QdXJwbGUx/MjMvdjQvZjgvNDMv/ZDAvZjg0M2QwNWMt/MWIxZi04NGY4LWEz/YmQtY2E5YmFjZjA0/MzYzL3NvdXJjZS81/MTJ4NTEyYmIuanBn"
-							}
-							alt="User photo profile"
-						/>
+						<img src={user.profileImage && user.profileImage} alt="User photo profile" />
 						<label htmlFor="fileInput">
 							<span className="settingsPPIcon material-symbols-outlined">upload</span>
 						</label>
@@ -122,6 +141,7 @@ const Settings = ({ user, setUser }) => {
 							// value={user.title}
 							onChange={handleImageInput}
 						/>
+						<button onClick={handleProfilePicture}>Update image</button>
 					</div>
 					<label>Username</label>
 					<input
