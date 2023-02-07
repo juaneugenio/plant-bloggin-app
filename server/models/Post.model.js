@@ -20,12 +20,12 @@ const postSchema = new Schema({
 		type: Schema.Types.ObjectId, //TO DO
 		ref: "User",
 	},
-	comments: [
-		{
-			type: Schema.Types.ObjectId, // TO DO
-			ref: "Comment",
-		},
-	],
+	// comments: [
+	// 	{
+	// 		type: Schema.Types.ObjectId, // TO DO
+	// 		ref: "Comment",
+	// 	},
+	// ],
 	time: { type: Date, default: Date.now() },
 });
 const Post = model("Post", postSchema);

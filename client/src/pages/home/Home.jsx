@@ -5,12 +5,14 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Posts from "../../components/posts/Posts";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getAllPosts } from "../../services/postServices";
+
 const Home = ({ user }) => {
 	const [posts, setPosts] = useState([]);
 	useEffect(() => {
 		const fetchingPosts = async () => {
 			try {
-				let { data } = await axios.get("http://localhost:3000/api/posts");
+				let { data } = await getAllPosts();
 				setPosts(data);
 			} catch (error) {
 				console.log(
