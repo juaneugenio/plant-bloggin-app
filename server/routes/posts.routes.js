@@ -1,8 +1,16 @@
 /** @format */
 const router = require("express").Router();
+const uploadPostPicture = require("../middlewares/cloudinary");
+const isLoggedIN = require("../middlewares/isLoggedIN");
 const PostModel = require("../models/Post.model");
 
 router.get("/", async (req, res) => {
+	// console.log(
+	// 	"%c ▶︎▶︎ -6-「headers.authorization」",
+	// 	"font-size:13px; background:#993441; color:#ffb8b1;",
+	// 	req.headers.authorization,
+	// );
+
 	try {
 		const allPosts = await PostModel.find();
 		res.status(200).json(allPosts);
@@ -10,9 +18,17 @@ router.get("/", async (req, res) => {
 		res.status(404).json({ message: error.message });
 	}
 });
-router.post("/", async (req, res) => {
+router.post("/", isLoggedIN, uploadPostPicture.single("blogPicture"), async (req, res) => {
+	const { title, description } = req.body;
+	console.log("▶︎▶︎▶︎ File: posts.routes ▶︎▶︎", req.user);
+	console.log("▶︎▶︎▶︎ REQ.FILE▶︎▶︎", req.file);
 	try {
-		const newPost = await PostModel.create(req.body);
+		const newPost = await PostModel.create({
+			title,
+			description,
+			imageUrl: req.file.path,
+			author: req.user._id,
+		});
 		res.status(200).json({ newPost });
 	} catch (error) {
 		res.status(500).json({ message: error.message });
