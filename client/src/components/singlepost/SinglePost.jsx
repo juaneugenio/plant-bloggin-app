@@ -1,23 +1,30 @@
 /** @format */
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import "./singlePost.css";
 import axios from "axios";
+import { getSinglePost } from "../../services/postServices";
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 const SinglePost = () => {
 	const { blogId } = useParams();
-	const [singlePost, setSinglePost] = useState({});
+	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const [singlePost, setSinglePost] = useState("");
+	const [authorPost, setAuthorPost] = useState("");
 
 	useEffect(() => {
-		const singlePostURL = `http://localhost:3000/api/posts/${blogId}`;
-		const fetchSinglePost = async () => {
-			try {
-				const response = await axios.get(singlePostURL);
+		setIsLoading(true);
+		getSinglePost(blogId)
+			.then((response) => {
+				setAuthorPost(response.data.getSinglePost.author);
 				setSinglePost(response.data.getSinglePost);
-			} catch (error) {
-				console.log("File: SinglePost --> Line: 16", error.message);
-			}
-		};
-		fetchSinglePost();
+				setIsLoading(false);
+				console.log("singlePost", singlePost);
+			})
+			.catch((error) => {
+				console.log("%c ▶︎▶︎ -23-「SinglePost」", "font-size:13px; background:#993441; color:#ffb8b1;", error.message);
+				setError(error.message);
+			});
 	}, []);
 	return (
 		<div className="singlePost">
@@ -42,8 +49,9 @@ const SinglePost = () => {
 				<div className="spInfo">
 					<span className="spAuthor">
 						Author:
-						<Link className="link-style">{singlePost.author ? <b> {singlePost.author} </b> : " No Author"}</Link>
+						<Link className="link-style">{authorPost.username ? <b> {authorPost.username}</b> : " No Author"}</Link>
 					</span>
+
 					<span className="spDate">{new Date(singlePost.time).toDateString()}</span>
 				</div>
 				<p className="spDescription">{singlePost.description}</p>

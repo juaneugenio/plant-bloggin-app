@@ -4,20 +4,18 @@ const uploadPostPicture = require("../middlewares/cloudinary");
 const isLoggedIN = require("../middlewares/isLoggedIN");
 const PostModel = require("../models/Post.model");
 
+////Getting all posts //////
 router.get("/", async (req, res) => {
-	// console.log(
-	// 	"%c ▶︎▶︎ -6-「headers.authorization」",
-	// 	"font-size:13px; background:#993441; color:#ffb8b1;",
-	// 	req.headers.authorization,
-	// );
-
 	try {
 		const allPosts = await PostModel.find();
+		allPosts.reverse();
 		res.status(200).json(allPosts);
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}
 });
+
+////Creating a single post //////
 router.post("/", isLoggedIN, uploadPostPicture.single("blogPicture"), async (req, res) => {
 	const { title, description } = req.body;
 	console.log("▶︎▶︎▶︎ File: posts.routes ▶︎▶︎", req.user);
@@ -29,23 +27,29 @@ router.post("/", isLoggedIN, uploadPostPicture.single("blogPicture"), async (req
 			imageUrl: req.file.path,
 			author: req.user._id,
 		});
-		res.status(200).json({ newPost });
+		res.status(200).json({ createdPost: newPost });
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
 });
+
+////Getting a single post //////
 router.get("/:id", async (req, res) => {
 	try {
-		const { id: postID } = req.params;
-		const getSinglePost = await PostModel.findOne({ _id: postID });
+		const { id: blogId } = req.params;
+		const getSinglePost = await PostModel.findOne({ _id: blogId }).populate("author");
 		if (!getSinglePost) {
 			return res.status(404).json({ message: `No Post with Id: ${postID}` });
 		}
+		// const authorPost = getSinglePost.author.username;
+
 		res.status(200).json({ getSinglePost });
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}
 });
+
+////Editting a single post //////
 router.patch("/:id", async (req, res) => {
 	try {
 		const { id: postID } = req.params;
@@ -61,6 +65,8 @@ router.patch("/:id", async (req, res) => {
 		res.status(404).json({ message: error.message });
 	}
 });
+
+////Deleting a single posts //////
 router.delete("/:id", async (req, res) => {
 	try {
 		const { id: postID } = req.params;

@@ -35,8 +35,8 @@ const WriteBlogPage = () => {
 		setIsLoading(true);
 		setError(false);
 
-		if (!blogPicture) {
-			setError("You must select a picture to upload!");
+		if (!blogPicture || !title || !description) {
+			setError("You must publish something!");
 			setIsLoading(false);
 			return;
 		}
@@ -65,7 +65,7 @@ const WriteBlogPage = () => {
 	}
 	return (
 		<div className="writePage">
-			{/* {error && <p>{error}</p>} */}
+			{error && <p>{error}</p>}
 			<img className="imgUploaded" src={imageUrl} alt={blogPicture.name ? blogPicture.name : "Upload an Image"} />
 			<form className="createForm" onSubmit={handleSubmit}>
 				<div className="formGroup1">
