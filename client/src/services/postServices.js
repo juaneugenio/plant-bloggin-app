@@ -14,3 +14,7 @@ export function createPost(blogPost) {
 	console.log("%c ▶︎▶︎ -14-「postServices」", "font-size:13px; background:#993441; color:#ffb8b1;", blogPost);
 	return postService.post("/", blogPost, sendUser()).then(onSuccess("create-post")).catch(onError("create-post"));
 }
+
+export function getSinglePost(blogId) {
+	return postService.get(`/${blogId}`, sendUser()).then(onSuccess("single-post")).catch(onError(blogId));
+}
