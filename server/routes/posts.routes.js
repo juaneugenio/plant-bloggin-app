@@ -67,7 +67,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 ////Deleting a single posts //////
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isLoggedIN, async (req, res) => {
 	try {
 		const { id: postID } = req.params;
 		const deleteSinglePost = await PostModel.findByIdAndDelete({ _id: postID });
