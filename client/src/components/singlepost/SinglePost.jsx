@@ -1,9 +1,10 @@
 /** @format */
 import "./singlePost.css";
 import axios from "axios";
-import { getSinglePost } from "../../services/postServices";
-import { useParams, Link } from "react-router-dom";
+import { getSinglePost, deleteSinglePost } from "../../services/postServices";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import * as PATH from "../../utils/paths";
 
 const SinglePost = ({ user }) => {
 	const { blogId } = useParams();
@@ -11,6 +12,7 @@ const SinglePost = ({ user }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [singlePost, setSinglePost] = useState("");
 	const [authorPost, setAuthorPost] = useState("");
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -27,9 +29,16 @@ const SinglePost = ({ user }) => {
 			});
 	}, []);
 
-	const handleDeletePost = (e) => {
-		e.preventDefault();
-		alert("vamos a borrrar!");
+	const handleDeletePost = () => {
+		setIsLoading(true);
+		deleteSinglePost(blogId)
+			.then((response) => {
+				if (!response.success) {
+					return setError(response.data);
+				}
+				navigate(PATH.TO__HOME_PAGE);
+			})
+			.catch();
 	};
 	return (
 		<div className="singlePost">
@@ -48,10 +57,10 @@ const SinglePost = ({ user }) => {
 					{singlePost.title}
 					{authorPost._id === user?._id ? (
 						<div className="editBtns">
+							<span className="singlePostIcon material-symbols-outlined">edit_note</span>
 							<span className="singlePostIcon material-symbols-outlined" onClick={handleDeletePost}>
-								edit_note
+								delete
 							</span>
-							<span className="singlePostIcon material-symbols-outlined">delete</span>
 						</div>
 					) : (
 						<span></span>

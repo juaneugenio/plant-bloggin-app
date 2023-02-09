@@ -18,3 +18,8 @@ export function createPost(blogPost) {
 export function getSinglePost(blogId) {
 	return postService.get(`/${blogId}`, sendUser()).then(onSuccess("single-post")).catch(onError(blogId));
 }
+export function deleteSinglePost(blogId) {
+	// const authorization = getUserToken();
+	console.log("This recipe succesful deleted 👉:", blogId);
+	return postService.delete(`/${blogId}`, sendUser()).then(onSuccess("deleted-post")).catch(onError("deleted-post"));
+}
