@@ -5,7 +5,7 @@ import { getSinglePost } from "../../services/postServices";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const SinglePost = () => {
+const SinglePost = ({ user }) => {
 	const { blogId } = useParams();
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +26,11 @@ const SinglePost = () => {
 				setError(error.message);
 			});
 	}, []);
+
+	const handleDeletePost = (e) => {
+		e.preventDefault();
+		alert("vamos a borrrar!");
+	};
 	return (
 		<div className="singlePost">
 			<div className="singlePostContent">
@@ -41,10 +46,16 @@ const SinglePost = () => {
 
 				<h1 className="singlePostTitle">
 					{singlePost.title}
-					<div className="editBtns">
-						<span className="singlePostIcon material-symbols-outlined">edit_note</span>
-						<span className="singlePostIcon material-symbols-outlined">delete</span>
-					</div>
+					{authorPost._id === user?._id ? (
+						<div className="editBtns">
+							<span className="singlePostIcon material-symbols-outlined" onClick={handleDeletePost}>
+								edit_note
+							</span>
+							<span className="singlePostIcon material-symbols-outlined">delete</span>
+						</div>
+					) : (
+						<span></span>
+					)}
 				</h1>
 				<div className="spInfo">
 					<span className="spAuthor">

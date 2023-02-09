@@ -5,7 +5,7 @@ import "./singlePage.css";
 const SinglePage = ({ user }) => {
 	return (
 		<div className="singlePage">
-			<SinglePost />
+			<SinglePost user={user} />
 			<Sidebar user={user} />
 		</div>
 	);
