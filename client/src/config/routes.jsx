@@ -6,6 +6,7 @@ import RegisterPage from "../pages/register/RegisterPage";
 import SinglePage from "../pages/single/SinglePage";
 import WriteBlogPage from "../pages/write/WriteBlogPage";
 import Settings from "../pages/settingsProfile/SettingsProfile";
+import EditSinglePost from "../components/form/EditSinglePost";
 
 const routes = (props) => {
 	const { user } = props;
@@ -30,6 +31,10 @@ const routes = (props) => {
 		{
 			path: PATH.TO__BLOG_SINGLE_PAGE,
 			element: <SinglePage {...props} />,
+		},
+		{
+			path: PATH.TO__BLOG_EDIT_PAGE,
+			element: user ? <EditSinglePost {...props} /> : <RegisterPage />,
 		},
 		{
 			path: PATH.TO__USER_PROFILE_PAGE,
