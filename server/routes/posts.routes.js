@@ -18,8 +18,8 @@ router.get("/", async (req, res) => {
 ////Creating a single post //////
 router.post("/", isLoggedIN, uploadPostPicture.single("blogPicture"), async (req, res) => {
 	const { title, description } = req.body;
-	console.log("▶︎▶︎▶︎ File: posts.routes ▶︎▶︎", req.user);
-	console.log("▶︎▶︎▶︎ REQ.FILE▶︎▶︎", req.file);
+	// console.log("▶︎▶︎▶︎ File: posts.routes ▶︎▶︎", req.user);
+	// console.log("▶︎▶︎▶︎ REQ.FILE▶︎▶︎", req.file);
 	try {
 		const newPost = await PostModel.create({
 			title,
@@ -50,15 +50,30 @@ router.get("/:id", async (req, res) => {
 });
 
 ////Editting a single post //////
-router.patch("/:id", async (req, res) => {
+router.patch("/edit/:id", isLoggedIN, uploadPostPicture.single("blogPicture"), async (req, res) => {
 	try {
-		const { id: postID } = req.params;
-		const patchSinglePost = await PostModel.findOneAndUpdate({ _id: postID }, req.body, {
-			new: true,
-			runValidators: true,
-		});
+		const { id: blogId } = req.params;
+
+		const { title, description, blogPicture } = req.body;
+		// if (req.file) {
+		// 	imageUrl = req.file.path;
+		// }
+		console.log("%c ▶︎▶︎ -58-「BODY---」", "font-size:13px; background:#993441; color:#ffb8b1;", req.body);
+		console.log("%c ▶︎▶︎ -58-FILEEEE---」", "font-size:13px; background:#993441; color:#ffb8b1;", req.file);
+		const patchSinglePost = await PostModel.findOneAndUpdate(
+			{ _id: blogId },
+			{
+				title,
+				description,
+				imageUrl: req.file.path,
+			},
+			{
+				new: true,
+				runValidators: true,
+			},
+		);
 		if (!patchSinglePost) {
-			return res.status(404).json({ message: `Post Id: ${postID} successful Updated!` });
+			return res.status(404).json({ message: `Post Id: ${blogId} Unsuccessful Updated!` });
 		}
 		res.status(200).json({ patchSinglePost });
 	} catch (error) {

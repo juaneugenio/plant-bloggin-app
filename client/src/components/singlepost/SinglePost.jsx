@@ -1,7 +1,7 @@
 /** @format */
 import "./singlePost.css";
 import axios from "axios";
-import { getSinglePost, deleteSinglePost } from "../../services/postServices";
+import { getSinglePost, deleteSinglePost, editSinglePost } from "../../services/postServices";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as PATH from "../../utils/paths";
@@ -37,9 +37,11 @@ const SinglePost = ({ user }) => {
 					return setError(response.data);
 				}
 				navigate(PATH.TO__HOME_PAGE);
+				setIsLoading(true);
 			})
 			.catch();
 	};
+
 	return (
 		<div className="singlePost">
 			<div className="singlePostContent">
@@ -57,7 +59,10 @@ const SinglePost = ({ user }) => {
 					{singlePost.title}
 					{authorPost._id === user?._id ? (
 						<div className="editBtns">
-							<span className="singlePostIcon material-symbols-outlined">edit_note</span>
+							<Link to={`/blog/edit/${blogId}`}>
+								<span className="singlePostIcon material-symbols-outlined">edit_note</span>
+							</Link>
+
 							<span className="singlePostIcon material-symbols-outlined" onClick={handleDeletePost}>
 								delete
 							</span>
