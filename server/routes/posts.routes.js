@@ -53,29 +53,24 @@ router.get("/:id", async (req, res) => {
 router.patch("/edit/:id", isLoggedIN, uploadPostPicture.single("blogPicture"), async (req, res) => {
 	try {
 		const { id: blogId } = req.params;
+		const { title, description } = req.body;
 
-		const { title, description, blogPicture } = req.body;
-		// if (req.file) {
-		// 	imageUrl = req.file.path;
-		// }
-		console.log("%c ▶︎▶︎ -58-「BODY---」", "font-size:13px; background:#993441; color:#ffb8b1;", req.body);
-		console.log("%c ▶︎▶︎ -58-FILEEEE---」", "font-size:13px; background:#993441; color:#ffb8b1;", req.file);
-		const patchSinglePost = await PostModel.findOneAndUpdate(
-			{ _id: blogId },
-			{
-				title,
-				description,
-				imageUrl: req.file.path,
-			},
-			{
-				new: true,
-				runValidators: true,
-			},
-		);
+		const newPost = {
+			title,
+			description,
+		};
+		if (req.file) {
+			newPost.imageUrl = req.file.path;
+		}
+		const patchSinglePost = await PostModel.findOneAndUpdate({ _id: blogId }, newPost, {
+			new: true,
+			runValidators: true,
+		});
+
 		if (!patchSinglePost) {
 			return res.status(404).json({ message: `Post Id: ${blogId} Unsuccessful Updated!` });
 		}
-		res.status(200).json({ patchSinglePost });
+		res.status(200).json(patchSinglePost);
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}

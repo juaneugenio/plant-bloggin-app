@@ -22,16 +22,21 @@ const EditSinglePost = () => {
 		setIsLoading(true);
 		getSinglePost(blogId)
 			.then((response) => {
-				// setAuthorPost(response.data.getSinglePost.author);
+				// setAuthorPost(response.data);
 				setSinglePost(response.data.getSinglePost);
-				// console.log("singlePost", { ...singlePost });
+				// console.log(
+				// 	"%c ▶︎▶︎ -27-「EditSinglePost」",
+				// 	"font-size:13px; background:#993441; color:#ffb8b1;",
+				// 	response.data,
+				// );
+
 				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.log("%c ▶︎▶︎ -23-「SinglePost」", "font-size:13px; background:#993441; color:#ffb8b1;", error.message);
 				setError(error.message);
 			});
-	}, [blogId]);
+	}, []);
 
 	//Picture Input change
 	const handlePictureChange = (event) => {
@@ -48,7 +53,7 @@ const EditSinglePost = () => {
 		setIsLoading(true);
 		setError(false);
 
-		// if (!blogPicture || !title || !description) {
+		// if (!title || !description) {
 		// 	setError("You must publish something!");
 		// 	setIsLoading(false);
 		// 	return;
@@ -56,8 +61,8 @@ const EditSinglePost = () => {
 		//Handling ImageUpload
 		const updatedPost = new FormData();
 		updatedPost.append("blogPicture", blogPicture);
-		// blogPost.append("formData", formData);
 		updatedPost.append("title", title);
+		updatedPost.append("imageUrl", imageUrl);
 		updatedPost.append("description", description);
 		// console.log("BLOGPOST", blogPost);
 
