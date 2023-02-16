@@ -22,14 +22,7 @@ const EditSinglePost = () => {
 		setIsLoading(true);
 		getSinglePost(blogId)
 			.then((response) => {
-				// setAuthorPost(response.data);
 				setSinglePost(response.data.getSinglePost);
-				// console.log(
-				// 	"%c ▶︎▶︎ -27-「EditSinglePost」",
-				// 	"font-size:13px; background:#993441; color:#ffb8b1;",
-				// 	response.data,
-				// );
-
 				setIsLoading(false);
 			})
 			.catch((error) => {
