@@ -102,6 +102,7 @@ const Settings = ({ user, setUser }) => {
 				if (error) {
 					return setIsLoading(false);
 				}
+				console.log("User was succesfull deleted");
 				navigate(PATH.TO__HOME_PAGE);
 				return setUser(null);
 			});

@@ -1,7 +1,7 @@
 /** @format */
 import "./singlePost.css";
 import axios from "axios";
-import { getSinglePost, deleteSinglePost, editSinglePost } from "../../services/postServices";
+import { getSinglePost, deleteSinglePost } from "../../services/postServices";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as PATH from "../../utils/paths";

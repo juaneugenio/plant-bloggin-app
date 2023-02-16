@@ -5,9 +5,9 @@ const userImageUpload = require("../middlewares/cloudinary");
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/User.model");
 const Session = require("../models/Session.model");
+const Post = require("../models/Post.model.js");
 const isLoggedOUT = require("../middlewares/isLoggedOUT");
 const isLoggedIN = require("../middlewares/isLoggedIN");
-const { response } = require("express");
 
 // router.get("/my-account", (req, res, next) => {
 // 	console.log("▶︎▶︎▶︎ File: user.routes ▶︎▶︎", req.body);
@@ -85,10 +85,10 @@ router.patch("/updateProfileImage", isLoggedIN, userImageUpload.single("profileI
 router.delete("/:userID", isLoggedIN, async (req, res, next) => {
 	const { userID } = req.params;
 
-	//To code when erasing the userspost with post Model File
-
+	//First finding all userposts trough the Id's. Result, array of posts id's
+	const userPosts = await (await Post.find({ author: userID })).map((post) => post._id);
+	//checking if user is in session from Client side.
 	const userSessionId = req.headers.authorization;
-
 	const userInSession = await Session.findById(userSessionId).populate("user");
 
 	if (userInSession.user._id.toString() !== userID) {
@@ -96,7 +96,12 @@ router.delete("/:userID", isLoggedIN, async (req, res, next) => {
 			errorMessage: "You are NOT aloud to delete this account.",
 		});
 	}
-	await Promise.all([UserModel.findByIdAndDelete(userID), Session.findByIdAndDelete(userSessionId)]);
+
+	await Promise.all([
+		Post.deleteMany({ _id: { $in: userPosts } }),
+		UserModel.findByIdAndDelete(userID),
+		Session.findByIdAndDelete(userSessionId),
+	]);
 	return res.status(200).json({ message: "Deletion succesful" });
 });
 

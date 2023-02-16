@@ -10,9 +10,6 @@ import Navbar from "./components/navbar/Navbar";
 import Loading from "./components/loading/Loading";
 import * as PATH from "../src/utils/paths";
 
-// import WriteBlogPage from "./pages/write/WriteBlogPage";
-// import Settings from "./pages/settingsProfile/SettingsProfile";
-
 function App() {
 	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +17,6 @@ function App() {
 
 	useEffect(() => {
 		const accessToken = USER_HELPERS.getUserToken();
-
 		if (!accessToken) {
 			return setIsLoading(false);
 		}
