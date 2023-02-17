@@ -1,6 +1,7 @@
 /** @format */
 
-require("dotenv/config");
+require("dotenv").config();
+
 require("./db");
 const express = require("express");
 const allRoutes = require("./routes/index.routes");
