@@ -55,7 +55,6 @@ const Settings = ({ user, setUser }) => {
 	};
 	///Image Input upload
 	const handleImageInput = (event) => {
-		// console.log('%c ▶︎▶︎ -58-「SettingsProfile」', 'font-size:13px; background:#993441; color:#ffb8b1;', event)
 		setUserPicture(event.target.files[0]);
 	};
 	const handleProfilePicture = (event) => {
