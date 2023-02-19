@@ -1,0 +1,79 @@
+/** @format */
+
+.writePage {
+	padding-top: 1.5rem;
+	/* text-align: center; */
+	margin: 0 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.imgUploaded {
+	width: 100%;
+	height: 14rem;
+	border-radius: 0.5rem;
+	object-fit: cover;
+}
+
+.uploadIcon {
+	padding: 0 0.3rem;
+	border: 2px solid #7b927c;
+	border-radius: 0.3rem;
+	color: #7b927c;
+	cursor: pointer;
+	float: left;
+}
+.createForm {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 1rem;
+}
+.formGroup1 {
+	margin-bottom: 1rem;
+}
+.formTitle {
+	font-family: "Varela Rounded", Calibri, "Trebuchet MS", sans-serif;
+	font-size: 1.8rem;
+	border-style: none none solid none;
+	border-color: #1b4769;
+	border-width: 1px;
+	width: 78vw;
+	outline: none;
+	margin-bottom: 1rem;
+	color: #1b4769;
+}
+.formDescription {
+	font-family: "Josefine", sans-serif;
+	font-size: 1.5rem;
+	font-weight: normal;
+	color: rgb(102, 98, 98);
+	outline: none;
+}
+.formTitle::placeholder,
+.formDescription::placeholder {
+	color: rgb(189, 185, 185);
+	font-weight: 400;
+}
+.formDescription {
+	width: 80vw;
+	/* height: 30vh; */
+	font-family: inherit;
+	font-size: 1.2rem;
+	border-color: rgb(223, 223, 195);
+	border-radius: 0.3rem;
+	padding: 0.5rem;
+}
+.btnSubmit {
+	position: absolute;
+	right: 1rem;
+	color: white;
+	background-color: #3388cb;
+	padding: 0.5rem;
+	border: none;
+	border-radius: 0.4rem;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
