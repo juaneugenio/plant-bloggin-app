@@ -2,7 +2,7 @@
 
 const router = require("express").Router();
 const userImageUpload = require("../middlewares/cloudinary");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const UserModel = require("../models/User.model");
 const Session = require("../models/Session.model");
 const Post = require("../models/Post.model.js");
