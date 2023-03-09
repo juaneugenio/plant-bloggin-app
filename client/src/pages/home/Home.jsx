@@ -30,15 +30,17 @@ const Home = ({ user }) => {
 	}, []);
 	return (
 		<>
-			<Header />
-			<div className="home">
-				{error ? (
-					<h3 style={{ width: "65rem", textAlign: "center" }}>An error has ocurred fetching the data.</h3>
-				) : (
-					<Posts posts={posts} />
-				)}
-				<Sidebar user={user} />
-			</div>
+			<main>
+				<Header />
+				<div className="home">
+					{error ? (
+						<h3 style={{ width: "65rem", textAlign: "center" }}>An error has ocurred fetching the data.</h3>
+					) : (
+						<Posts posts={posts} />
+					)}
+					<Sidebar user={user} />
+				</div>
+			</main>
 		</>
 	);
 };

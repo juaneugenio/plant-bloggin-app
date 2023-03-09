@@ -8,6 +8,8 @@ import * as USER_HELPERS from "./utils/userToken";
 import { getLoggedIn, logout } from "./services/auth";
 import Navbar from "./components/navbar/Navbar";
 import Loading from "./components/loading/Loading";
+import Footer from "./components/footer/Footer";
+
 import * as PATH from "../src/utils/paths";
 
 function App() {
@@ -62,6 +64,7 @@ function App() {
 					<Route key={route.path} path={route.path} element={route.element} />
 				))}
 			</Routes>
+			<Footer />
 		</>
 	);
 }

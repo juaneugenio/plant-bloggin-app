@@ -5,10 +5,10 @@ const header = () => {
 		<div className="header">
 			<div className="headerTitles">
 				<span className="headerTitleTitle">My Bl.anty</span>
-				<span className="headerTitleText">
+				<p className="headerTitleText">
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quam laboriosam beatae, hic perferendis veniam
 					id exercitationem.
-				</span>
+				</p>
 			</div>
 			<img
 				className="headerImg"

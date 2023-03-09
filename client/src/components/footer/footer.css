@@ -1,0 +1,24 @@
+/** @format */
+
+footer {
+	background: #f7c779;
+	color: rgb(4, 90, 136);
+	height: 2rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	clear: both;
+	/* position: fixed; */
+	bottom: 0;
+	height: 60px;
+	/* margin-top: -200px; */
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+a:hover {
+	font-weight: 700;
+}
