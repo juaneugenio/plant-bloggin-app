@@ -1,9 +1,7 @@
 /** @format */
 import "./home.css";
 import Header from "../../components/header/header";
-import Sidebar from "../../components/sidebar/Sidebar";
 import Posts from "../../components/posts/Posts";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postServices";
 
@@ -38,7 +36,6 @@ const Home = ({ user }) => {
 					) : (
 						<Posts posts={posts} />
 					)}
-					<Sidebar user={user} />
 				</div>
 			</main>
 		</>

@@ -5,7 +5,9 @@ const header = () => {
 		<div className="header-container">
 			<div className="txt-container">
 				<h1 className="txt-title">My Bl.anty</h1>
-				<p className="txt-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<p className="txt-description">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. More in our nice app!
+				</p>
 			</div>
 			{/* <img
 				className="img-bg"

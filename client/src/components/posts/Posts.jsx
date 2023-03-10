@@ -4,7 +4,7 @@ import "./posts.css";
 import PostCard from "../postcard/PostCard";
 const Posts = ({ posts }) => {
 	return (
-		<div className="posts">
+		<div className="grid-container">
 			{posts.map((post) => (
 				<PostCard key={post._id} post={post} />
 			))}
