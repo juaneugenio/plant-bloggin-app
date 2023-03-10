@@ -2,7 +2,7 @@
 nav {
 	display: grid;
 	width: 100%;
-	background-color: #dd7e7e;
+	background-color: #76db73;
 	/* grid-template-columns: 22% auto 22%; */
 	grid-template-columns: repeat(auto-fit, minmax(5rem, auto));
 	grid-column-gap: 0.5rem;
@@ -10,10 +10,12 @@ nav {
 	align-items: center;
 	padding: 0.5rem;
 	justify-content: space-around;
-
 	font-family: "Josefin Sans", "Roboto", sans-serif;
 	font-size: 1rem;
 	line-height: 1.5;
+	position: fixed;
+	z-index: 999;
+	top: 0;
 }
 .link {
 	text-decoration: none;
@@ -31,12 +33,12 @@ nav {
 }
 .logo-txt {
 	font-weight: bold;
-	color: #dff167;
+	color: #008002;
 	margin-top: 0;
 	font-size: 1.5rem;
 }
 .logo:hover {
-	color: rgb(6, 222, 6);
+	color: #008002;
 }
 .material-symbols-outlined {
 	margin-bottom: -0.9rem;
@@ -53,4 +55,9 @@ nav {
 	grid-column-gap: 1.3rem; */
 
 	justify-items: end;
+}
+.profileImg {
+	width: 2rem;
+	margin-bottom: 0;
+	border-radius: 50%;
 }

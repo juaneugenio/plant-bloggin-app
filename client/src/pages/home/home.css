@@ -1,5 +1,9 @@
 /** @format */
+
 .home {
 	display: flex;
 	flex-wrap: wrap;
 }
+/* body {
+	margin-top: 5.1rem;
+} */
