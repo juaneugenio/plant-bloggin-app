@@ -2,20 +2,21 @@
 
 .registerContainer {
 	display: flex;
-	height: calc(100vh - 3rem);
+	height: calc(100vh - 3.5rem);
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: url("https://hips.hearstapps.com/amv-prod-gp.s3.amazonaws.com/gearpatrol/wp-content/uploads/2019/01/10-Best-Indoor-Plants-Gear-Patrol-lead-full.jpg?crop=1.00xw:0.751xh;0,0.244xh&resize=980:*");
+	background: url("../../assets/register-img.jpg");
 	background-size: cover;
-	color: #3388cb;
+	color: #008002;
 }
 .registerTitle {
 	font-size: 2.5rem;
-	color: #d4e6f4;
+	color: #c6ffca;
 	font-weight: bold;
 }
 .registerForm {
+	width: 15rem;
 	margin: 1rem;
 	display: flex;
 	flex-direction: column;
@@ -77,4 +78,9 @@
 }
 .registerBtn:hover {
 	background-color: #7ba37a;
+}
+@media only screen and (max-width: 375px) {
+	.registerForm {
+		width: 70%;
+	}
 }

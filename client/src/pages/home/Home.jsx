@@ -1,6 +1,6 @@
 /** @format */
 import "./home.css";
-import Header from "../../components/header/header";
+import Header from "../../components/header/Header";
 import Posts from "../../components/posts/Posts";
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postServices";

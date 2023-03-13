@@ -1,22 +1,31 @@
 /** @format */
 
 .loginContainer {
-	display: flex;
-	height: calc(100vh - 3rem);
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background: url("https://www.allstakesupply.com.au/wp-content/uploads/2022/02/allstake-1.jpg");
+	display: grid;
+	place-items: center;
+	background: url("../../assets/login-img.jpg");
 	background-size: cover;
-	color: #3388cb;
+	color: #008002;
+	height: calc(100vh - 3.5rem);
+	width: 100%;
+}
+.form-container {
+	width: 15rem;
+	display: flex;
+	flex-direction: column;
 }
 .loginTitle {
-	font-size: 2.5rem;
-	color: #d4e6f4;
+	font-size: 2rem;
+	color: #c6ffca;
 	font-weight: bold;
+	text-align: center;
+	/* width: 15rem; */
+	margin: 0 0 1rem 0;
+	padding: 0;
 }
+
 .loginForm {
-	margin: 1rem;
+	margin: 0.3rem;
 	display: flex;
 	flex-direction: column;
 	background: rgba(245, 197, 197, 0.8);
@@ -36,7 +45,7 @@
 	background: transparent;
 	border: none;
 	border-bottom: 1px solid #80775b;
-	color: #1b4769;
+	color: #008002;
 	outline: none;
 }
 .loginInput::placeholder {
@@ -50,8 +59,8 @@
 	padding: 0.6rem;
 	border: none;
 	border-radius: 0.4rem;
-	background-color: #1b4769;
-	color: #d4e6f4;
+	background-color: #008002;
+	color: #c6ffca;
 	cursor: pointer;
 }
 .loginBtn:hover {
@@ -59,7 +68,7 @@
 }
 .registerInfo {
 	font-family: "Lora", serif;
-	font-size: 0.6rem;
+	font-size: 0.7rem;
 	color: #80775b;
 	text-align: center;
 	margin: 0.3rem 0;
@@ -77,4 +86,10 @@
 }
 .registerBtn:hover {
 	background-color: #7ba37a;
+}
+
+@media only screen and (max-width: 300px) {
+	.form-container {
+		width: 90%;
+	}
 }
