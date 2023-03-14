@@ -1,6 +1,5 @@
 /** @format */
 import "./singlePost.css";
-import axios from "axios";
 import { getSinglePost, deleteSinglePost } from "../../services/postServices";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -39,48 +38,48 @@ const SinglePost = ({ user }) => {
 				navigate(PATH.TO__HOME_PAGE);
 				setIsLoading(true);
 			})
-			.catch();
+			.catch((error) => {
+				console.log("👉 Line-42 ▶︎▶︎", error.message);
+			});
 	};
 
 	return (
-		<div className="singlePost">
-			<div className="singlePostContent">
-				<img
-					className="spImage"
-					src={
-						singlePost.imageUrl
-							? singlePost.imageUrl
-							: "https://friendlystock.com/wp-content/uploads/2020/12/3-kawaii-indoor-plant-cartoon-clipart.jpg"
-					}
-					alt={`Photo of ${singlePost.title}`}
-				/>
+		<div className="singlePostContent">
+			<img
+				className="spImage"
+				src={
+					singlePost.imageUrl
+						? singlePost.imageUrl
+						: "https://friendlystock.com/wp-content/uploads/2020/12/3-kawaii-indoor-plant-cartoon-clipart.jpg"
+				}
+				alt={`Photo of ${singlePost.title}`}
+			/>
 
-				<h1 className="singlePostTitle">
-					{singlePost.title}
-					{authorPost._id === user?._id ? (
-						<div className="editBtns">
-							<Link to={`/blog/edit/${blogId}`}>
-								<span className="singlePostIcon material-symbols-outlined">edit_note</span>
-							</Link>
+			<h1 className="singlePostTitle">
+				{singlePost.title}
+				{authorPost._id === user?._id ? (
+					<div className="editBtns">
+						<Link to={`/blog/edit/${blogId}`}>
+							<span className="singlePostIcon material-symbols-outlined">edit_note</span>
+						</Link>
 
-							<span className="singlePostIcon material-symbols-outlined" onClick={handleDeletePost}>
-								delete
-							</span>
-						</div>
-					) : (
-						<span></span>
-					)}
-				</h1>
-				<div className="spInfo">
-					<span className="spAuthor">
-						Author:
-						<Link className="link-style">{authorPost.username ? <b> {authorPost.username}</b> : " No Author"}</Link>
-					</span>
+						<span className="singlePostIcon material-symbols-outlined" onClick={handleDeletePost}>
+							delete
+						</span>
+					</div>
+				) : (
+					<span></span>
+				)}
+			</h1>
+			<div className="spInfo">
+				<span className="spAuthor">
+					Author:
+					<Link className="link-style">{authorPost.username ? <b> {authorPost.username}</b> : " No Author"}</Link>
+				</span>
 
-					<span className="spDate">{new Date(singlePost.time).toDateString()}</span>
-				</div>
-				<p className="spDescription">{singlePost.description}</p>
+				<span className="spDate">{new Date(singlePost.time).toDateString()}</span>
 			</div>
+			<p className="spDescription">{singlePost.description}</p>
 		</div>
 	);
 };

@@ -1,15 +1,16 @@
 /** @format */
 
 .fixed-bottom {
-	position: absolute;
+	position: relative;
 	color: #c6ffca;
 	width: 100%;
 	display: flex;
 	background-color: #008002;
 	/* align-items: center; */
 	/* justify-content: center; */
-	/* clear: both; */
+	clear: both;
 	/* position: fixed; */
+	bottom: 0;
 }
 .txt-footer-container {
 	display: flex;

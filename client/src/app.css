@@ -1,26 +1,18 @@
 /** @format */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	font-size: 100%;
-}
-body {
-	margin: 0 auto;
-	padding: 0;
-	height: 100vh;
-	position: relative;
-}
-.link-style {
-	text-decoration: none;
-	color: inherit;
-}
+
 .errorStyle {
 	background-color: rgb(47, 44, 44);
+	border-radius: 0.4rem;
 	color: rgb(110, 239, 4);
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	width: 13rem;
-	text-align: center;
 	padding: 0.7rem;
-	border-radius: 0.4rem;
+	text-align: center;
+	width: 13rem;
+}
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin-top: 3.8rem;
+	width: 100%;
 }

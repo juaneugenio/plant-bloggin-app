@@ -58,13 +58,19 @@ function App() {
 
 	return (
 		<>
-			<Navbar user={user} handleLogOut={handleLogOut} />
-			<Routes>
-				{routes({ user, setUser, userAuthenticated, handleLogOut }).map((route) => (
-					<Route key={route.path} path={route.path} element={route.element} />
-				))}
-			</Routes>
-			<Footer />
+			<header>
+				<Navbar user={user} handleLogOut={handleLogOut} />
+			</header>
+			<main>
+				<Routes>
+					{routes({ user, setUser, userAuthenticated, handleLogOut }).map((route) => (
+						<Route key={route.path} path={route.path} element={route.element} />
+					))}
+				</Routes>
+			</main>
+			<footer>
+				<Footer />
+			</footer>
 		</>
 	);
 }

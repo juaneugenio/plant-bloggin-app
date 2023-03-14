@@ -5,8 +5,12 @@ import "./singlePage.css";
 const SinglePage = ({ user }) => {
 	return (
 		<div className="singlePage">
-			<SinglePost user={user} />
-			<Sidebar user={user} />
+			<div className="post-container">
+				<SinglePost user={user} />
+			</div>
+			<div className="side-element">
+				<Sidebar user={user} />
+			</div>
 		</div>
 	);
 };
