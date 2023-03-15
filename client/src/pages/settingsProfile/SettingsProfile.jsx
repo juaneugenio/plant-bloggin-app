@@ -1,5 +1,4 @@
 /** @format */
-import Sidebar from "../../components/sidebar/Sidebar";
 import Loading from "../../components/loading/Loading";
 import "./settingsProfile.css";
 import * as PATH from "../../utils/paths";
@@ -182,7 +181,6 @@ const Settings = ({ user, setUser }) => {
 				</form>
 				{error && <p>{error}</p>}
 			</div>
-			<Sidebar user={user} />
 		</div>
 	);
 };
