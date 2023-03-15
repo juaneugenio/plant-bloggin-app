@@ -65,40 +65,43 @@ const WriteBlogPage = () => {
 	}
 	return (
 		<div className="writePage">
-			{error && <p>{error}</p>}
-			<img className="imgUploaded" src={imageUrl} alt={blogPicture.name ? blogPicture.name : "Upload an Image"} />
-			<form className="createForm" onSubmit={handleSubmit}>
-				<div className="formGroup1">
-					<label htmlFor="fileInput">
-						<span className="uploadIcon material-symbols-outlined">upload</span>
-						<input type="file" id="fileInput" style={{ display: "none" }} onChange={handlePictureChange} />
-					</label>
-				</div>
-				<div className="formGroup">
-					<input
-						name="title"
-						value={title}
-						type="text"
-						className="formTitle"
-						placeholder="Title"
-						onChange={handleTextChange}
-						autoFocus={true}
-					/>
-					<textarea
-						name="description"
-						value={description}
-						type="text"
-						className="formDescription"
-						placeholder="Describe your Plant..."
-						rows="20"
-						cols="20"
-						onChange={handleTextChange}
-					></textarea>
-				</div>
-				<button type="submit" className="btnSubmit">
-					Publish
-				</button>
-			</form>
+			<div className="image-container">
+				{error && <p>{error}</p>}
+				<form className="createForm" onSubmit={handleSubmit}>
+					{/* <img className="imgUploaded" src={imageUrl} alt={blogPicture ? blogPicture.name : "Upload an Image"} /> */}
+					<div className="formGroup">
+						<label htmlFor="fileInput">
+							<span className="uploadIcon material-symbols-outlined">+</span>
+							<span> Image</span>
+							<input type="file" id="fileInput" style={{ display: "none" }} onChange={handlePictureChange} />
+						</label>
+					</div>
+					<div className="formGroup">
+						<input
+							name="title"
+							value={title}
+							type="text"
+							className="formTitle"
+							placeholder="Title"
+							onChange={handleTextChange}
+							autoFocus={true}
+						/>
+						<textarea
+							name="description"
+							value={description}
+							type="text"
+							className="formDescription"
+							placeholder="Describe your Plant..."
+							rows="20"
+							cols="20"
+							onChange={handleTextChange}
+						></textarea>
+					</div>
+					<button type="submit" className="btnSubmit">
+						Publish
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };

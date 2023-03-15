@@ -19,21 +19,13 @@
 	text-align: center;
 	padding: 0 0.2rem;
 }
-.postCat {
-	font-family: "Varela Round", Arial, Helvetica, sans-serif;
-	font-weight: 400;
-	font-size: 0.7rem;
-	color: #7b927c;
-	line-height: 1.1rem;
-	margin-top: 0.9rem;
-	margin-right: 0.6rem;
-	cursor: pointer;
-}
+
 .postTitle {
 	font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
 	font-size: 1.2rem;
 	font-weight: 900;
-	color: #1b4769;
+	color: #008002;
+	margin: 0.4rem 0.1rem;
 	/* padding: 0 9rem; */
 }
 .postTitle::first-letter {

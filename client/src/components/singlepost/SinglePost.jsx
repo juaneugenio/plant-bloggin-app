@@ -4,8 +4,6 @@ import "./singlePost.css";
 import { Link } from "react-router-dom";
 
 const SinglePost = ({ user, singlePost, authorPost, handleDeletePost }) => {
-	console.log("👉 Line-9-AUTHOR ▶︎▶︎", authorPost);
-
 	return (
 		<div className="singlePostContent">
 			<img
