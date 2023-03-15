@@ -40,6 +40,7 @@ const SinglePost = ({ user }) => {
 			})
 			.catch((error) => {
 				console.log("👉 Line-42 ▶︎▶︎", error.message);
+				setError(error.message);
 			});
 	};
 

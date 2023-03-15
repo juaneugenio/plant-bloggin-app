@@ -19,26 +19,9 @@ const Sidebar = ({ user }) => {
 						<p>{user.username}</p>
 						<p>{user.userDescription}</p>
 					</div>
-					<div className="sidebarItem">
-						<span className="sidebarTitle">CATEGORIES</span>
-						<ul className="sidebarList">
-							<li className="sidebarListItem">indoor</li>
-							<li className="sidebarListItem">outdoor</li>
-							<li className="sidebarListItem">room</li>
-							<li className="sidebarListItem">kitchen</li>
-						</ul>
-					</div>
 				</>
 			) : (
-				<div className="sidebarItem">
-					<span className="sidebarTitle">CATEGORIES</span>
-					<ul className="sidebarList">
-						<li className="sidebarListItem">indoor</li>
-						<li className="sidebarListItem">outdoor</li>
-						<li className="sidebarListItem">room</li>
-						<li className="sidebarListItem">kitchen</li>
-					</ul>
-				</div>
+				<div className="sidebarItem"></div>
 			)}
 		</div>
 	);

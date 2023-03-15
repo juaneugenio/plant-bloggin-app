@@ -16,10 +16,10 @@ const PostCard = ({ post }) => {
 				/>
 			</Link>
 			<div className="postInfo">
-				<div className="postCategories">
+				{/* <div className="postCategories">
 					<span className="postCat">Indoor</span>
 					<span className="postCat">Outdoor</span>
-				</div>
+				</div> */}
 				<Link to={`/blog/${post._id}`} className="link-style">
 					<p className="postTitle">{post.title}</p>
 				</Link>
