@@ -2,25 +2,29 @@
 
 .settingsPage {
 	display: flex;
-	flex-wrap: wrap;
-	font-family: "Josefine", Calibri, "Trebuchet MS", sans-serif;
+	flex-direction: column;
+	/* flex-wrap: wrap; */
+	justify-content: center;
+	font-family: "Josefin sans", Calibri, "Trebuchet MS", sans-serif;
+	width: 50%;
+	margin: 1.5rem auto;
 }
 
 .settingsWrapper {
-	flex: 5;
-	margin: 1.3rem;
+	margin: 1.3rem 0.7rem;
 }
 
 .settingsTitle {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 1.3rem;
 }
 
 .settingsTitleUpdate {
 	font-size: 1.3rem;
 	margin-bottom: 1.2rem;
-	color: #043e80;
+	color: #008002;
 }
 
 .settingsTitleDelete {
@@ -38,11 +42,13 @@
 .settingsForm {
 	display: flex;
 	flex-direction: column;
+	margin-top: 1.3rem;
 }
 
 .settingsPP {
 	display: flex;
-	align-items: center;
+	align-items: baseline;
+	justify-content: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
@@ -79,7 +85,7 @@
 .settingsForm > label {
 	font-size: 20px;
 	margin-top: 20px;
-	color: #1b4769;
+	color: #008002;
 }
 
 .settingsPPInput {
@@ -101,7 +107,7 @@
 	border: none;
 	border-radius: 0.5rem;
 	color: white;
-	background-color: #b2cbb1;
+	background-color: #008002;
 	padding: 0.6rem;
 	margin-top: 1.3rem;
 	cursor: pointer;
@@ -111,5 +117,11 @@
 }
 
 .settingsSubmitButton:hover {
-	background-color: #80775b;
+	background-color: #b2cbb1;
+}
+@media screen and (max-width: 590px) {
+	.settingsPage {
+		width: 100%;
+		padding: 0 0.7rem;
+	}
 }

@@ -89,22 +89,26 @@ const Settings = ({ user, setUser }) => {
 
 	//Deleting User
 	const handleDeleteUser = (e) => {
-		e.preventDefault();
-		setIsLoading(true);
-		deleteUser(user._id)
-			.then((response) => {
-				if (!response.success) {
-					return setError(response.data);
-				}
-			})
-			.finally(() => {
-				if (error) {
-					return setIsLoading(false);
-				}
-				console.log("User was succesfull deleted");
-				navigate(PATH.TO__HOME_PAGE);
-				return setUser(null);
-			});
+		if (confirm("Are you sure to continue? After accepting, all your data will be erased.") === true) {
+			e.preventDefault();
+			setIsLoading(true);
+			deleteUser(user._id)
+				.then((response) => {
+					if (!response.success) {
+						return setError(response.data);
+					}
+				})
+				.finally(() => {
+					if (error) {
+						return setIsLoading(false);
+					}
+					console.log("User was succesfull deleted");
+					navigate(PATH.TO__HOME_PAGE);
+					return setUser(null);
+				});
+		} else {
+			return;
+		}
 	};
 	if (isLoading) {
 		return <Loading />;
@@ -122,15 +126,15 @@ const Settings = ({ user, setUser }) => {
 					)}
 				</div>
 				<p>
-					Here you can edit and update your Profile Info if you need it, otherwise continue enjoying of our community
-					plants.
+					You can independently edit either the image or your form data. If you do both, please press the update button
+					for each operation.
 				</p>
 				<form className="settingsForm" onSubmit={handleSubmit}>
 					<label>Your current Profile Picture</label>
 					<div className="settingsPP">
 						<img src={user.profileImage && user.profileImage} alt="User photo profile" />
 						<label htmlFor="fileInput">
-							<span className="settingsPPIcon material-symbols-outlined">upload</span>
+							<span className="settingsPPIcon material-symbols-outlined">add</span>
 						</label>
 						<input
 							key={imageInputKey}
@@ -138,11 +142,12 @@ const Settings = ({ user, setUser }) => {
 							type="file"
 							style={{ display: "none" }}
 							className="settingsPPInput"
-							// value={user.title}
 							onChange={handleImageInput}
-						/>
-						<button onClick={handleProfilePicture}>Update image</button>
+						/>{" "}
 					</div>
+					<button onClick={handleProfilePicture} className="settingsSubmitButton">
+						Update image
+					</button>
 					<label>Username</label>
 					<input
 						type="text"
@@ -176,7 +181,7 @@ const Settings = ({ user, setUser }) => {
 						onChange={handleChange}
 					/>
 					<button className="settingsSubmitButton" type="submit">
-						Submit changes
+						Submit Form changes
 					</button>
 				</form>
 				{error && <p>{error}</p>}
