@@ -5,9 +5,7 @@ const Header = () => {
 		<div className="header-container">
 			<div className="txt-container">
 				<h1 className="txt-title">Bl.anty</h1>
-				<p className="txt-description">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. More in our nice app!
-				</p>
+				<p className="txt-description">Create an account and start sharing your passion for plants!</p>
 			</div>
 		</div>
 	);

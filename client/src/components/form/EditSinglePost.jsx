@@ -1,7 +1,7 @@
 /** @format */
 
 import axios from "axios";
-
+import "./editsinglepost.css";
 import { getSinglePost, editSinglePost } from "../../services/postServices";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -105,7 +105,7 @@ const EditSinglePost = () => {
 					></textarea>
 				</div>
 				<button type="submit" className="btnSubmit">
-					Publish
+					Submit changes
 				</button>
 			</form>
 		</div>

@@ -13,18 +13,18 @@
 	width: 100%;
 }
 .txt-footer-container {
-	align-items: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	margin: 0.5rem;
 	width: 100%;
+	align-items: center;
 }
 .txt-footer-container p {
 	font-family: "Josefin Sans", serif;
 	font-weight: lighter;
 	margin: 0;
 	padding: 0.2rem;
+	text-align: center;
 }
 a {
 	color: inherit;

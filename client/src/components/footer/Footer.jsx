@@ -7,12 +7,15 @@ function Footer() {
 	return (
 		<footer className="fixed-bottom">
 			<div className="txt-footer-container">
-				<p>©Bl.anty App - {new Date().getFullYear()}</p>
+				<p>©Bl.anty App 2023 - {new Date().getFullYear()}</p>
 				<p>
-					Author: <strong>Juan C. Eugenio - MERN</strong> Fullstack Web Developer
+					Author: <strong>Juan C. Eugenio.</strong>
+					<p>
+						<strong>MERN</strong> Fullstack Web Developer
+					</p>
 				</p>
 				<p>
-					Picture credits: <a href="https://www.freepik.com/">freepik</a> -{" "}
+					Picture credits: <a href="https://www.freepik.com/">freepik</a> -
 					<a href="https://www.setaswall.com/">setaswall</a>
 				</p>
 			</div>
