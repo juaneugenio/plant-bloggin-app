@@ -2,18 +2,22 @@
 import "./home.css";
 import Header from "../../components/header/Header";
 import Posts from "../../components/posts/Posts";
+import Loading from "../../components/loading/Loading";
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postServices";
 
 const Home = () => {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const fetchingPosts = async () => {
 			try {
+				setIsLoading(true);
 				let { data } = await getAllPosts();
 				setPosts(data);
+				setIsLoading(false);
 			} catch (error) {
 				setError(error.message);
 				console.log(
@@ -26,6 +30,11 @@ const Home = () => {
 		};
 		fetchingPosts();
 	}, []);
+
+	if (isLoading) {
+		return <Loading />;
+	}
+
 	return (
 		<>
 			<main>

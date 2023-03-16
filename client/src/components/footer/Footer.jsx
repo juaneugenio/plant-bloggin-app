@@ -10,9 +10,9 @@ function Footer() {
 				<p>©Bl.anty App 2023 - {new Date().getFullYear()}</p>
 				<p>
 					Author: <strong>Juan C. Eugenio.</strong>
-					<p>
-						<strong>MERN</strong> Fullstack Web Developer
-					</p>
+				</p>
+				<p>
+					<strong>MERN</strong> Fullstack Web Developer
 				</p>
 				<p>
 					Picture credits: <a href="https://www.freepik.com/">freepik</a> -

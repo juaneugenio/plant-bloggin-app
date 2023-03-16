@@ -2,6 +2,7 @@
 
 import "./posts.css";
 import PostCard from "../postcard/PostCard";
+
 const Posts = ({ posts }) => {
 	return (
 		<div className="grid-container">

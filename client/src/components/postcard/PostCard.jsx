@@ -7,11 +7,7 @@ const PostCard = ({ post }) => {
 			<Link to={`/blog/${post._id}`}>
 				<img
 					className="postImg"
-					src={
-						post.imageUrl
-							? post.imageUrl
-							: "https://friendlystock.com/wp-content/uploads/2020/12/3-kawaii-indoor-plant-cartoon-clipart.jpg"
-					}
+					src={post.imageUrl ? post.imageUrl : "../../assets/singlePost-img.jpg"}
 					alt={`Picture of ${post.title} `}
 				/>
 			</Link>
