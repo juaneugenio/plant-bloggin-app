@@ -34,6 +34,7 @@
 	font-weight: 300;
 	padding: 0;
 	text-align: left;
+	margin-top: 1rem;
 }
 @media only screen and(max-width: 299px) {
 	.txt-container {
