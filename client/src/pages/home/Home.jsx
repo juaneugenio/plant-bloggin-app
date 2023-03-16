@@ -5,7 +5,7 @@ import Posts from "../../components/posts/Posts";
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postServices";
 
-const Home = ({ user }) => {
+const Home = () => {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState("");
 
