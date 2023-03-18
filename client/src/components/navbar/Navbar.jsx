@@ -12,7 +12,7 @@ const Navbar = ({ user, handleLogOut }) => {
 	return (
 		<nav>
 			<div className="logo">
-				<i className="material-symbols-outlined">grass</i>
+				<i className="material-symbols-outlined icon-grass">grass</i>
 
 				<Link to={PATH.TO__HOME_PAGE} className="logo-txt">
 					Bl.anty
@@ -20,7 +20,7 @@ const Navbar = ({ user, handleLogOut }) => {
 			</div>
 			<div className="links-center">
 				<Link to={PATH.TO__HOME_PAGE} className="link">
-					HOME
+					<i className="material-symbols-outlined icon-home">home</i>
 				</Link>
 				<Link to={PATH.TO__BLOG_CREATE_PAGE} className="link">
 					CREATE

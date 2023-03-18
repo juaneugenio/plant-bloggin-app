@@ -40,20 +40,29 @@ nav {
 .logo:hover {
 	color: #008002;
 }
-.material-symbols-outlined {
+.icon-grass {
 	margin-bottom: -0.9rem;
+}
+.icon-home {
+	color: #008002;
+}
+.icon-home:hover {
+	color: #035405;
 }
 .links-center {
 	display: grid;
-	grid-column-gap: 1.3rem;
+	grid-column-gap: 1rem;
 	grid-template-columns: auto auto;
 	justify-items: center;
+	align-items: center;
 }
 .links-right {
+	border: 1px solid black;
 	display: grid;
-	grid-column-gap: 1.3rem;
+	grid-column-gap: 1rem;
 	grid-template-columns: auto auto;
 	justify-items: end;
+	align-items: center;
 }
 .profileImg {
 	border-radius: 50%;
